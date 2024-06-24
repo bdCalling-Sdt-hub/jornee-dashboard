@@ -7,7 +7,7 @@ import { HiUserGroup } from "react-icons/hi";
 import { FaUserPlus } from "react-icons/fa6";
 import { LuBox } from "react-icons/lu";
 import { TbDatabaseDollar } from "react-icons/tb";
-import UserCard from "./UserCard";
+
 import { Link } from "react-router-dom";
 import trendingImage from "../../../assets/trendingUp.png";
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BackButton from "./BackButton";
+import BackButton from "../BackButton";
 import { Form, Input, Button } from "antd";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import Swal from "sweetalert2";

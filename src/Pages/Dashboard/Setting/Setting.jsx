@@ -1,7 +1,7 @@
 import React from "react";
 import BackButton from "../BackButton";
-import Profile from "../Profile";
-import ChangePassword from "../ChangePassword";
+import Profile from "./Profile";
+import ChangePassword from "./ChangePassword";
 import { Tabs } from "antd";
 
 const Setting = () => {
