@@ -3,9 +3,13 @@ import { Button, Checkbox, Form, Input } from "antd";
 import React from "react";
 import login from "../../assets/Login.png";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+
 const Login = () => {
+  const navigate = useNavigate();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
+    navigate("/");
   };
 
   return (
@@ -81,6 +85,12 @@ const Login = () => {
           <label
             style={{ display: "block", marginBottom: "5px" }}
             htmlFor="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Password!",
+              },
+            ]}
           >
             Password
           </label>
