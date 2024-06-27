@@ -82,10 +82,7 @@ const MakeAdmin = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <FaEdit
-          style={{ textAlign: "center", marginLeft: "50%" }}
-          onClick={() => handleEditData(record)}
-        />
+        <FaEdit className="mx-auto" onClick={() => handleEditData(record)} />
       ),
     },
   ];
