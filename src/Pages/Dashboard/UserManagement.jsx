@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import BackButton from "../Dashboard/BackButton";
+import BackButton from "./BackButton";
 import { MdOutlineFilterList } from "react-icons/md";
 import { FiEye, FiSearch } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
-import { Calendar, Dropdown, Input, Modal, Slider, Table } from "antd";
+import { Button, Calendar, Dropdown, Input, Modal, Slider, Table } from "antd";
 import { DownOutlined, EyeOutlined } from "@ant-design/icons";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { CiMenuKebab } from "react-icons/ci";
+import ViewTestReportModal from "../../Components/ViewTestReportModal";
 
 const data = [
   {
@@ -132,13 +133,15 @@ const data = [
   },
 ];
 
-const TotalSellerList = () => {
+const UserManagement = () => {
   const [page, setPage] = useState(
     new URLSearchParams(window.location.search).get("page") || 1
   );
 
   const [modalData, setModalData] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [viewTestModal, setViewTestModal] = useState(false);
+
   const showModal = (value) => {
     console.log(value);
     setModalData(value);
@@ -153,17 +156,17 @@ const TotalSellerList = () => {
 
   const columns = [
     {
-      title: "S.No",
+      title: "User ID",
       dataIndex: "key",
       key: "key",
     },
     {
-      title: "Name",
+      title: "User Name",
       dataIndex: "name",
       key: "username",
     },
     {
-      title: "Email",
+      title: "User Email",
       dataIndex: "email",
       key: "email",
     },
@@ -203,7 +206,7 @@ const TotalSellerList = () => {
             padding: "10px",
           }}
         >
-          User List
+          User Test Report
         </h1>
 
         <div>
@@ -220,12 +223,14 @@ const TotalSellerList = () => {
         </div>
       </div>
       <Modal
+        centered
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={false}
+        width={550}
       >
-        <div>
+        <div className="pt-14 ps-5">
           <div className=" flex     text-lg  w-full justify-between py-4 ">
             <p className="font-semibold w-1/2"> User ID</p>
             <p className=" w-1/2"> {modalData?.key}</p>
@@ -247,10 +252,36 @@ const TotalSellerList = () => {
             <p className="font-semibold w-1/2"> Join Date</p>
             <p className=" w-1/2"> {modalData?.joinDate}</p>
           </div>
+
+          <div
+            className="flex justify-center items-center mt-12 mb-6"
+            onClick={() => setViewTestModal(true)}
+          >
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              style={{
+                border: "none",
+                width: "34%",
+                height: "45px",
+                background: "#7D4C48",
+                color: "white",
+                borderRadius: "8px",
+                outline: "none",
+              }}
+            >
+              View Test Report
+            </Button>
+          </div>
         </div>
       </Modal>
+      <ViewTestReportModal
+        viewTestModal={viewTestModal}
+        setViewTestModal={setViewTestModal}
+      />
     </div>
   );
 };
 
-export default TotalSellerList;
+export default UserManagement;

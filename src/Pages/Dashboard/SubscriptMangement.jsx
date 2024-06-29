@@ -111,7 +111,7 @@ const MakeAdmin = () => {
         width={500}
         footer={false}
       >
-        <div>
+        <div className="mt-10">
           <Form
             name="normal_login"
             initialValues={{
@@ -126,7 +126,9 @@ const MakeAdmin = () => {
                   display: "block",
                   marginBottom: "5px",
                   textAlign: "start",
+                  color: "black",
                 }}
+                className="text-lg font-medium"
               >
                 Package Name
               </label>
@@ -139,6 +141,7 @@ const MakeAdmin = () => {
                     background: "white",
                     borderRadius: "8px",
                     outline: "none",
+                    color: "black",
                   }}
                 />
               </Form.Item>
@@ -150,8 +153,9 @@ const MakeAdmin = () => {
                   display: "block",
                   marginBottom: "5px",
                   textAlign: "start",
+                  color: "black",
                 }}
-                htmlFor=""
+                className="text-lg font-medium"
               >
                 Package Price
               </label>
@@ -164,12 +168,13 @@ const MakeAdmin = () => {
                     background: "white",
                     borderRadius: "8px",
                     outline: "none",
+                    color: "black",
                   }}
                 />
               </Form.Item>
             </div>
 
-            <Form.Item className="w-full">
+            <Form.Item className="w-full mt-10">
               <Button
                 type="primary"
                 htmlType="submit"

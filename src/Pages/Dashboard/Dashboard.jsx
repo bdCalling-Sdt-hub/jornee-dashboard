@@ -26,7 +26,7 @@ const Dashboard = () => {
     },
     {
       title: "User Management",
-      path: "/seller-list",
+      path: "/user-list",
       icon: <LuUser size={24} />,
     },
     {

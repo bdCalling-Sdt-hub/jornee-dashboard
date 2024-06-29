@@ -11,7 +11,8 @@ import MakeAdmin from "./Pages/Dashboard/SubscriptMangement";
 import ChangePassword from "./Pages/Dashboard/Setting/ChangePassword";
 import Setting from "./Pages/Dashboard/Setting/Setting";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
-import TotalSellerList from "./Pages/Dashboard/TotalSellerList";
+import UserManagement from "./Pages/Dashboard/UserManagement";
+// import TotalSellerList from "./Pages/Dashboard/TotalSellerList";
 import Profile from "./Pages/Dashboard/Setting/Profile";
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
                 element={<ChangePassword />}
               />
               <Route path="/settings-profile" element={<Profile />} />
-              <Route path="/seller-list" element={<TotalSellerList />} />
+              <Route path="/user-list" element={<UserManagement />} />
             </Route>
 
             <Route path="/login" element={<Login />} />
