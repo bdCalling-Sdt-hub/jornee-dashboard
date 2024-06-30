@@ -91,7 +91,7 @@ const data = [
 ];
 
 export default function DailyRentChart() {
-  const [year, setYear] = useState(2024);
+  const [year, setYear] = useState("Jan");
 
   const items = [
     {
@@ -146,9 +146,9 @@ export default function DailyRentChart() {
       >
         <p
           style={{
-            marginTop: "10px",
-            fontSize: "20px",
-            marginBottom: "10px",
+            marginTop: "14px",
+            fontSize: "22px",
+            marginBottom: "14px",
             color: "black",
           }}
           className=" font-semibold"

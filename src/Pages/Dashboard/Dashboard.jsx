@@ -126,12 +126,13 @@ const Dashboard = () => {
                   width: "100%",
                   backgroundColor:
                     item.path === pathname ? "#7D4C48" : "transparent",
-                  color: item.path === pathname ? "#fff" : "#6A6D7C",
+                  color: item.path === pathname ? "#fff" : "black",
                   alignItems: "center",
                   margin: "auto  0 auto 0",
                   gap: "14px",
                   padding: "7px 14px 7px",
                   borderRadius: "5px",
+                  fontWeight: "700",
                 }}
               >
                 <div style={{ height: "24px" }}>{item.icon}</div>
@@ -184,12 +185,13 @@ const Dashboard = () => {
                   width: "100%",
                   backgroundColor:
                     item.path === pathname ? "#7D4C48" : "transparent",
-                  color: item.path === pathname ? "#fff" : "#6A6D7C",
+                  color: item.path === pathname ? "#fff" : "black",
                   alignItems: "center",
                   margin: "auto  0 auto 0",
                   gap: "14px",
                   padding: "7px 14px 7px",
                   borderRadius: "5px",
+                  fontWeight: "700",
                 }}
               >
                 <div style={{ height: "24px" }}>{item.icon}</div>
@@ -226,32 +228,9 @@ const Dashboard = () => {
             alignItems: "center",
           }}
         >
-          <div>
-            <div
-              style={{
-                width: "512px",
-                height: "42px",
-                borderRadius: "8px",
-              }}
-              className=" flex gap-5 items-center"
-            >
-              <Input
-                placeholder="Search..."
-                prefix={<FiSearch size={14} color="#868FA0" />}
-                suffix={<IoClose size={14} color="#2B2A2A" />}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  fontSize: "14px",
-                  backgroundColor: "#D5D5D5",
-                }}
-                size="middle"
-              />
-            </div>
-          </div>
-
+          <div></div>
           <Link to="/setting">
-            <div className=" flex items-center ">
+            <div className=" flex items-center  ">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLotvhr2isTRMEzzT30Cj0ly77jFThGXr0ng&usqp=CAU"
                 style={{
@@ -275,7 +254,7 @@ const Dashboard = () => {
             marginBottom: "20px",
             marginLeft: "255px",
             marginRight: "40px",
-            background: "#C5C5C5",
+            background: "#F1F2F6",
             overflow: "auto",
             padding: "20px",
           }}

@@ -19,29 +19,53 @@ function DashboardHome() {
   const data = [
     {
       name: "New Seller",
-      count: "220",
+      count: "22,065",
       icon: <HiUserGroup color="#00B2DC" size={32} />,
-      title2: " 8.5% Up from yesterday",
+      title2: (
+        <div className="text-[#606060] text-lg">
+          {" "}
+          <span className="text-[#00B69B] font-semibold"> 8.5%</span> Up from
+          yesterday
+        </div>
+      ),
       bgColor: "#E2F7FC",
     },
     {
       name: "Active Seller",
-      count: "320",
+      count: "32,307",
       icon: <FaUserPlus color="#F98002" size={32} />,
-      title2: " 7.5% Up from yesterday",
+      title2: (
+        <div className="text-[#606060] text-lg">
+          {" "}
+          <span className="text-[#00B69B] font-semibold"> 7.5%</span> Up from
+          yesterday
+        </div>
+      ),
       bgColor: "#FFE3C7",
     },
     {
       name: "Total Seller",
-      count: "120",
+      count: "12,000",
       icon: <LuBox color="#FEC53D" size={32} />,
-      title2: " 6.5% Up from yesterday",
+      title2: (
+        <div className="text-[#606060] text-lg">
+          {" "}
+          <span className="text-[#00B69B] font-semibold"> 6.5%</span> Up from
+          yesterday
+        </div>
+      ),
       bgColor: "#FFF3D6",
     },
     {
       name: "Total Profit",
       count: "1000",
-      title2: " 8.5% Up from yesterday",
+      title2: (
+        <div className="text-[#606060] text-lg">
+          {" "}
+          <span className="text-[#00B69B] font-semibold"> 8.5%</span> Up from
+          yesterday
+        </div>
+      ),
       icon: <TbDatabaseDollar color="#5664FD" size={32} />,
       bgColor: "#DDE0FF",
     },
@@ -49,20 +73,38 @@ function DashboardHome() {
       name: "Active Seller",
       count: "320",
       icon: <FaUserPlus color="#F98002" size={32} />,
-      title2: " 7.5% Up from yesterday",
+      title2: (
+        <div className="text-[#606060] text-lg">
+          {" "}
+          <span className="text-[#00B69B] font-semibold"> 8.5%</span> Up from
+          yesterday
+        </div>
+      ),
       bgColor: "#FFE3C7",
     },
     {
       name: "Total Seller",
       count: "120",
       icon: <LuBox color="#FEC53D" size={32} />,
-      title2: " 6.5% Up from yesterday",
+      title2: (
+        <div className="text-[#606060] text-lg">
+          {" "}
+          <span className="text-[#00B69B] font-semibold"> 6.5%</span> Up from
+          yesterday
+        </div>
+      ),
       bgColor: "#FFF3D6",
     },
     {
       name: "Total Profit",
       count: "1000",
-      title2: " 8.5% Up from yesterday",
+      title2: (
+        <div className="text-[#606060] text-lg">
+          {" "}
+          <span className="text-[#00B69B] font-semibold"> 5.5%</span> Up from
+          yesterday
+        </div>
+      ),
       icon: <TbDatabaseDollar color="#5664FD" size={32} />,
       bgColor: "#DDE0FF",
     },
@@ -79,7 +121,7 @@ function DashboardHome() {
                 <div className="leading-loose">
                   <p
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       fontWeight: "400",
                       color: "#6A6D7C",
                     }}
@@ -91,7 +133,7 @@ function DashboardHome() {
                     style={{
                       fontSize: "32px",
                       fontWeight: "600",
-                      color: "#50525D",
+                      color: "black",
                     }}
                   >
                     {item.count}
