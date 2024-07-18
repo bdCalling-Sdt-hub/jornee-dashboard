@@ -7,13 +7,16 @@ import Login from "./Pages/Auth/Login";
 import UpdatePassword from "./Pages/Auth/UpdatePassword";
 import NotFound from "./404";
 import PrivateRoute from "./routes/PrivateRoute";
-import MakeAdmin from "./Pages/Dashboard/SubscriptMangement";
+import SubscriptionManageMent from "./Pages/Dashboard/SubscriptMangement";
 import ChangePassword from "./Pages/Dashboard/Setting/ChangePassword";
 import Setting from "./Pages/Dashboard/Setting/Setting";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
 import UserManagement from "./Pages/Dashboard/UserManagement";
 // import TotalSellerList from "./Pages/Dashboard/TotalSellerList";
 import Profile from "./Pages/Dashboard/Setting/Profile";
+import Test from "./Pages/Dashboard/Test";
+import TestConnection from "./Pages/Dashboard/TestConnection";
+import Report from "./Pages/Dashboard/Report";
 
 function App() {
   return (
@@ -32,8 +35,11 @@ function App() {
               }
             >
               <Route path="/" element={<DashboardHome />} />
+              <Route path="/subscription" element={<SubscriptionManageMent />} /> 
+<Route path="/test" element={<Test/>} /> 
+<Route path="/test-connection" element={<TestConnection/>} /> 
+<Route path="/report" element={<Report/>} />
 
-              <Route path="/make-admin" element={<MakeAdmin />} />
               <Route path="/setting" element={<Setting />} />
               <Route
                 path="/setting-change-password"

@@ -107,6 +107,19 @@ function DashboardHome() {
       ),
       icon: <TbDatabaseDollar color="#5664FD" size={32} />,
       bgColor: "#DDE0FF",
+    }, 
+    {
+      name: "Total Monthly Earning",
+      count: "22,065",
+      icon: <HiUserGroup color="#00B2DC" size={32} />,
+      title2: (
+        <div className="text-[#606060] text-lg">
+          {" "}
+          <span className="text-[#00B69B] font-semibold"> 8.5%</span> Up from
+          yesterday
+        </div>
+      ),
+      bgColor: "#E2F7FC",
     },
   ];
 

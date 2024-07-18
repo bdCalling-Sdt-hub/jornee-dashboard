@@ -2,47 +2,64 @@ import { Form, Input, Modal, Table, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { MdOutlineDelete } from "react-icons/md";
 import BackButton from "./BackButton";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa"; 
+import { RiDeleteBinLine } from "react-icons/ri";
+import EditSubscriptionModal from "../../Components/EditSubscriptionModal";
+import AddUserModal from "../../Components/AddUserModal";
 const data = [
   {
     key: "1",
-    fullName: "per month",
-    price: 120,
+    name: "Tushar",
+    email: "tushar@gmail.com",
   },
   {
     key: "2",
-    fullName: "per year ",
-    price: 100,
+    name: "Rahman",
+    email: "rahman@gmail.com",
   },
   {
     key: "3",
-    fullName: "per week",
-    price: 90,
+    name: "Rafsan",
+    email: "rafsan@gmail.com",
   },
   {
     key: "4",
-    fullName: "per day",
-    price: 100,
+    name: "jusef",
+    email: "jusef@gmail.com",
   },
   {
     key: "5",
-    fullName: "per month",
-    price: 85,
+    name: "Asad",
+    email: "asad@gmail.com",
+  
   },
-  {
-    key: "6",
-    fullName: "per week",
-    price: 80,
-  },
-  {
-    key: "7",
-    fullName: "per year",
-    price: 75,
-  },
-];
+];  
 
-const MakeAdmin = () => {
-  const [openAddModel, setOpenAddModel] = useState(false);
+const subscriptionData = [
+  {
+    key:1 ,
+    packageName: "Per Month" , 
+    price : "250$"
+
+  } ,
+  {
+    key:2 ,
+    packageName: "Per Year" , 
+    price : "400$"
+
+  } ,
+  {
+    key:3 ,
+    packageName: "Per Week" , 
+    price : "150$"
+
+  } ,
+
+]
+
+const SubscriptMangement = () => {
+  const [openAddModel, setOpenAddModel] = useState(false); 
+  const [openModal , setOpenModal]= useState(false)
   const [reFresh, setReFresh] = useState("");
   const [editData, setEditData] = useState();
 
@@ -67,31 +84,55 @@ const MakeAdmin = () => {
       key: "key",
     },
     {
-      title: "Package Name",
-      dataIndex: "fullName",
-      key: "fullName",
+      title: "User Name",
+      dataIndex: "name",
+      key: "name",
     },
 
     {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      render: (_, record) => (
-        <FaEdit className="mx-auto" onClick={() => handleEditData(record)} />
+      render: (_, record) => ( <RiDeleteBinLine className="mx-auto text-red-600"  size={20} />
+       
       ),
     },
-  ];
+  ]; 
+
+    // subscription column  
+    const subscriptionColumns =[
+      {title: "S.No" ,
+      dataIndex:"key" , 
+      key:"key"
+    } , 
+      {title: "Package Name" ,
+      dataIndex:"packageName" , 
+      key:"packageName"
+    } , 
+      {title: "Price" ,
+      dataIndex:"price" , 
+      key:"price"
+    } , 
+      {title: "Action" ,
+      dataIndex:"delete" , 
+      key:"delete" ,
+      render:(_, record)=> <FaEdit className="mx-auto" onClick={() => handleEditData(record)} />
+    } , 
+    ] 
+
   return (
     <div>
       <div style={{ margin: "24px 0" }}>
         <BackButton link="/" />
       </div>
-      <h1
+
+<div>
+<h1
         style={{
           fontSize: "20px",
           fontWeight: 600,
@@ -102,101 +143,50 @@ const MakeAdmin = () => {
         Edit Subscription Plan
       </h1>
 
-      <Table columns={columns} dataSource={data} pagination={false} />
-
-      <Modal
-        centered
-        open={openAddModel}
-        onCancel={() => setOpenAddModel(false)}
-        width={500}
-        footer={false}
+      <Table columns={subscriptionColumns} dataSource={subscriptionData} pagination={false} /> 
+</div>
+ 
+ <div className=" mt-[100px]"> 
+ <div className="flex items-center justify-between py-3"> 
+ <h1
+        style={{
+          fontSize: "20px",
+          fontWeight: 600,
+          color: "#2F2F2F",
+          padding: "10px",
+        }}
       >
-        <div className="mt-10">
-          <Form
-            name="normal_login"
-            initialValues={{
-              fullName: editData?.fullName,
-              price: editData?.price,
-            }}
-            className="text-center"
-          >
-            <div style={{ marginBottom: "16px" }}>
-              <label
-                style={{
-                  display: "block",
-                  marginBottom: "5px",
-                  textAlign: "start",
-                  color: "black",
-                }}
-                className="text-lg font-medium"
-              >
-                Package Name
-              </label>
-              <Form.Item style={{ marginBottom: 0 }} name="fullName">
-                <Input
-                  type="text"
-                  style={{
-                    border: "1px solid #E0E4EC",
-                    height: "52px",
-                    background: "white",
-                    borderRadius: "8px",
-                    outline: "none",
-                    color: "black",
-                  }}
-                />
-              </Form.Item>
-            </div>
-
-            <div style={{ marginBottom: "16px" }}>
-              <label
-                style={{
-                  display: "block",
-                  marginBottom: "5px",
-                  textAlign: "start",
-                  color: "black",
-                }}
-                className="text-lg font-medium"
-              >
-                Package Price
-              </label>
-              <Form.Item name="price" style={{ marginBottom: 0 }}>
-                <Input
-                  type="text"
-                  style={{
-                    border: "1px solid #E0E4EC",
-                    height: "52px",
-                    background: "white",
-                    borderRadius: "8px",
-                    outline: "none",
-                    color: "black",
-                  }}
-                />
-              </Form.Item>
-            </div>
-
-            <Form.Item className="w-full mt-10">
-              <Button
+        Add Subscription Free User
+      </h1>
+ <Button 
+ onClick={()=>setOpenModal(true)}
                 type="primary"
                 htmlType="submit"
                 block
                 style={{
                   border: "none",
-                  width: "34%",
-                  height: "45px",
+                  width: "50px",
+                  height: "50px",
                   background: "#7D4C48",
                   color: "white",
-                  borderRadius: "8px",
+                  borderRadius: "100%",
                   outline: "none",
-                }}
+                }} 
+                className="text-3xl shadow-lg"
               >
-                Submit
+               +
               </Button>
-            </Form.Item>
-          </Form>
-        </div>
-      </Modal>
+ </div>
+
+
+      <Table columns={columns} dataSource={data} pagination={false} />
+ </div>
+
+     <EditSubscriptionModal setOpenAddModel={setOpenAddModel} openAddModel={openAddModel} editData={editData}/> 
+
+     <AddUserModal openModal={openModal} setOpenModal={setOpenModal}/>
     </div>
   );
 };
 
-export default MakeAdmin;
+export default SubscriptMangement;

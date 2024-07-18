@@ -1,17 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import BackButton from "./BackButton";
-import { MdOutlineFilterList } from "react-icons/md";
-import { FiEye, FiSearch } from "react-icons/fi";
-import { IoClose } from "react-icons/io5";
-import { Button, Calendar, Dropdown, Input, Modal, Slider, Table } from "antd";
-import { DownOutlined, EyeOutlined } from "@ant-design/icons";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
-import { CiMenuKebab } from "react-icons/ci";
-import ViewTestReportModal from "../../Components/ViewTestReportModal";
 
-const data = [
+import { Button,  Modal,  Table } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
+ 
+
+import ViewTestReportModal from "../../Components/ViewTestReportModal";
+ 
+
+
+
+const UserData = [
   {
     key: "1",
     name: "Tushar",
@@ -153,8 +152,8 @@ const UserManagement = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
-  const columns = [
+//  user column  
+  const UserColumns = [
     {
       title: "User ID",
       dataIndex: "key",
@@ -172,12 +171,16 @@ const UserManagement = () => {
     },
 
     {
-      title: "ACTION",
+      title: "View",
       dataIndex: "printView",
       key: "printView",
       render: (_, record) => <EyeOutlined onClick={() => showModal(record)} />,
     },
-  ];
+  ];  
+
+
+
+
 
   const handlePageChange = (page) => {
     setPage(page);
@@ -211,8 +214,8 @@ const UserManagement = () => {
 
         <div>
           <Table
-            columns={columns}
-            dataSource={data}
+            columns={UserColumns}
+            dataSource={UserData}
             className="text-center"
             pagination={{
               pageSize: 10,
@@ -220,7 +223,9 @@ const UserManagement = () => {
               onChange: handlePageChange,
             }}
           />
-        </div>
+        </div> 
+
+
       </div>
       <Modal
         centered

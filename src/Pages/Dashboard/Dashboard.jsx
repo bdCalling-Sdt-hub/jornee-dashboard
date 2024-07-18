@@ -3,21 +3,16 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 // import LogoText from "../../assets/logo-text.jpg";
-import { HiLogout, HiOutlineMail } from "react-icons/hi";
 import { LuUser } from "react-icons/lu";
 import { TbUserPlus } from "react-icons/tb";
 import { MdDashboard } from "react-icons/md";
-import { FiSearch } from "react-icons/fi";
-import { IoClose } from "react-icons/io5";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 const { Header, Sider, Content } = Layout;
 import { PoweroffOutlined, SettingOutlined } from "@ant-design/icons";
+import { RiFileEditLine } from "react-icons/ri";
 
 const Dashboard = () => {
-  const [dropdown, setDropdown] = useState(false);
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-
   const linkItems = [
     {
       title: "Dashboard",
@@ -31,8 +26,18 @@ const Dashboard = () => {
     },
     {
       title: "Subscription Management",
-      path: "/make-admin",
+      path: "/subscription",
       icon: <TbUserPlus size={24} />,
+    },
+    {
+      title: "Test",
+      path: "/test",
+      icon: <HiOutlineClipboardDocumentList size={24} />,
+    },
+    {
+      title: "Report",
+      path: "/report",
+      icon: <RiFileEditLine size={24} />,
     },
   ];
 
