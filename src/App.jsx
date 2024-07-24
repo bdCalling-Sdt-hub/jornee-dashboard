@@ -17,6 +17,8 @@ import Profile from "./Pages/Dashboard/Setting/Profile";
 import Test from "./Pages/Dashboard/Test";
 import TestConnection from "./Pages/Dashboard/TestConnection";
 import Report from "./Pages/Dashboard/Report";
+import Resources from "./Pages/Dashboard/Resources";
+import Notifications from "./Pages/Dashboard/Notifications";
 
 function App() {
   return (
@@ -35,10 +37,15 @@ function App() {
               }
             >
               <Route path="/" element={<DashboardHome />} />
-              <Route path="/subscription" element={<SubscriptionManageMent />} /> 
-<Route path="/test" element={<Test/>} /> 
-<Route path="/test-connection" element={<TestConnection/>} /> 
-<Route path="/report" element={<Report/>} />
+              <Route
+                path="/subscription"
+                element={<SubscriptionManageMent />}
+              />
+              <Route path="/test" element={<Test />} />
+              <Route path="/test-connection" element={<TestConnection />} />
+              <Route path="/report" element={<Report />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/notifications" element={<Notifications />} />
 
               <Route path="/setting" element={<Setting />} />
               <Route

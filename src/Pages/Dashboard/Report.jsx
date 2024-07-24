@@ -1,38 +1,37 @@
-import React from 'react';
-const data = [
-    {
-      key: "1",
-      testName: "Connection",
-     
-    },
-    {
-      key: "2",
-      testName: "Safety",
-    
-    },
-    {
-      key: "3",
-      testName: "Appreciation",
-      
-    },
-    {
-      key: "4",
-      testName: "Autonomy",
-      
-    },
-    {
-      key: "5",
-      testName: "Impact",
-     
-    
-    },
-  ]; 
+import React from "react";
+import ReportTable from "../../Components/Report/ReportTable";
+import EmotionsLogged from "../../Components/Report/EmotionsLogged";
+
 const Report = () => {
-    return (
-        <div>
-            this is report page 
-        </div>
-    );
+  return (
+    <div className="py-5">
+      <h1
+        style={{
+          fontSize: "20px",
+          fontWeight: 600,
+          color: "#2F2F2F",
+          padding: "10px",
+        }}
+      >
+        {" "}
+        Report{" "}
+      </h1>
+      <ReportTable />
+
+      <h1
+        style={{
+          fontSize: "20px",
+          fontWeight: 600,
+          color: "#2F2F2F",
+          paddingTop: "30px",
+        }}
+      >
+        {" "}
+        Emotions Logged{" "}
+      </h1>
+      <EmotionsLogged />
+    </div>
+  );
 };
 
 export default Report;

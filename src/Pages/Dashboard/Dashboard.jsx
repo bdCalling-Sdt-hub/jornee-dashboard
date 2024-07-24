@@ -5,11 +5,12 @@ import Logo from "../../assets/logo.png";
 // import LogoText from "../../assets/logo-text.jpg";
 import { LuUser } from "react-icons/lu";
 import { TbUserPlus } from "react-icons/tb";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdOutlineNotificationsActive } from "react-icons/md";
 import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 const { Header, Sider, Content } = Layout;
 import { PoweroffOutlined, SettingOutlined } from "@ant-design/icons";
 import { RiFileEditLine } from "react-icons/ri";
+import { GrResources } from "react-icons/gr";
 
 const Dashboard = () => {
   const { pathname } = useLocation();
@@ -39,6 +40,16 @@ const Dashboard = () => {
       path: "/report",
       icon: <RiFileEditLine size={24} />,
     },
+    {
+      title: "Resources",
+      path: "/resources",
+      icon: <GrResources size={24} />,
+    },
+    {
+      title: "Notifications",
+      path: "/notifications",
+      icon: <MdOutlineNotificationsActive size={24} />,
+    },
   ];
 
   const linkItems2 = [
@@ -61,7 +72,7 @@ const Dashboard = () => {
   return (
     <Layout style={{ height: "100vh", width: "100vw" }}>
       <Sider
-        width="253px"
+        width="293px"
         trigger={null}
         style={{
           overflow: "auto",
@@ -70,7 +81,7 @@ const Dashboard = () => {
           overflowY: "hidden",
           zIndex: 2,
           backgroundColor: "white",
-          paddingRight: "20px",
+          paddingRight: "10px",
         }}
       >
         <div
@@ -246,8 +257,8 @@ const Dashboard = () => {
                 alt=""
               />
               <div>
-                <p className="p-3 h-3"> DR. Jim ahhmed </p>
-                <p className="p-3"> ADMIN </p>
+                <p className="p-3 h-3 font-semibold"> DR. Jim ahhmed </p>
+                <p className="p-3"> Admin </p>
               </div>
             </div>
           </Link>
@@ -256,9 +267,7 @@ const Dashboard = () => {
         <Content
           style={{
             marginTop: "60px",
-            marginBottom: "20px",
-            marginLeft: "255px",
-            marginRight: "40px",
+            marginLeft: "17%",
             background: "#F1F2F6",
             overflow: "auto",
             padding: "20px",

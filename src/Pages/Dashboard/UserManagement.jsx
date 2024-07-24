@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import BackButton from "./BackButton";
 
-import { Button,  Modal,  Table } from "antd";
+import { Button, Modal, Table } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
- 
-
-import ViewTestReportModal from "../../Components/ViewTestReportModal";
- 
-
-
+import { FaEye } from "react-icons/fa6";
 
 const UserData = [
   {
@@ -139,7 +134,6 @@ const UserManagement = () => {
 
   const [modalData, setModalData] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [viewTestModal, setViewTestModal] = useState(false);
 
   const showModal = (value) => {
     console.log(value);
@@ -152,7 +146,7 @@ const UserManagement = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-//  user column  
+  //  user column
   const UserColumns = [
     {
       title: "User ID",
@@ -174,13 +168,11 @@ const UserManagement = () => {
       title: "View",
       dataIndex: "printView",
       key: "printView",
-      render: (_, record) => <EyeOutlined onClick={() => showModal(record)} />,
+      render: (_, record) => (
+        <FaEye className="mx-auto" onClick={() => showModal(record)} />
+      ),
     },
-  ];  
-
-
-
-
+  ];
 
   const handlePageChange = (page) => {
     setPage(page);
@@ -223,9 +215,7 @@ const UserManagement = () => {
               onChange: handlePageChange,
             }}
           />
-        </div> 
-
-
+        </div>
       </div>
       <Modal
         centered
@@ -257,34 +247,8 @@ const UserManagement = () => {
             <p className="font-semibold w-1/2"> Join Date</p>
             <p className=" w-1/2"> {modalData?.joinDate}</p>
           </div>
-
-          <div
-            className="flex justify-center items-center mt-12 mb-6"
-            onClick={() => setViewTestModal(true)}
-          >
-            <Button
-              type="primary"
-              htmlType="submit"
-              block
-              style={{
-                border: "none",
-                width: "34%",
-                height: "45px",
-                background: "#7D4C48",
-                color: "white",
-                borderRadius: "8px",
-                outline: "none",
-              }}
-            >
-              View Test Report
-            </Button>
-          </div>
         </div>
       </Modal>
-      <ViewTestReportModal
-        viewTestModal={viewTestModal}
-        setViewTestModal={setViewTestModal}
-      />
     </div>
   );
 };

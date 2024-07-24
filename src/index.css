@@ -112,3 +112,11 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 :where(.css-dev-only-do-not-override-djtmh8).ant-tabs .ant-tabs-ink-bar {
   background: #7d4c48 !important;
 }
+
+.ant-upload-select {
+  height: 30px !important;
+}
+
+.slick-dots li button:before {
+  font-size: 14px;
+}
