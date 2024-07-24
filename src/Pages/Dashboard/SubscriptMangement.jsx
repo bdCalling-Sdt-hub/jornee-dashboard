@@ -94,7 +94,7 @@ const SubscriptMangement = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <RiDeleteBinLine className="mx-auto text-red-600" size={20} />
+        <RiDeleteBinLine className=" text-red-600" size={20} />
       ),
     },
   ];
@@ -109,7 +109,7 @@ const SubscriptMangement = () => {
       dataIndex: "delete",
       key: "delete",
       render: (_, record) => (
-        <FaEdit className="mx-auto" onClick={() => handleEditData(record)} />
+        <FaEdit className="" onClick={() => handleEditData(record)} />
       ),
     },
   ];

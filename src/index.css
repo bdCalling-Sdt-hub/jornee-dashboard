@@ -103,13 +103,11 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 }
 
 /* tab  */
-:where(.css-dev-only-do-not-override-djtmh8).ant-tabs
-  .ant-tabs-tab.ant-tabs-tab-active
-  .ant-tabs-tab-btn {
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
   color: #7d4c48 !important;
   border-color: #7d4c48 !important;
 }
-:where(.css-dev-only-do-not-override-djtmh8).ant-tabs .ant-tabs-ink-bar {
+.ant-tabs .ant-tabs-ink-bar {
   background: #7d4c48 !important;
 }
 
@@ -117,6 +115,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   height: 30px !important;
 }
 
+/* slider  */
 .slick-dots li button:before {
   font-size: 14px;
 }

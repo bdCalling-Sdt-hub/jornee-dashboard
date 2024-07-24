@@ -54,7 +54,7 @@ const EmotionTable = () => {
       dataIndex: "percentage",
       key: "percentage",
       render: (percentage, record) => (
-        <div className=" mx-auto w-3/4">
+        <div className=" w-3/4">
           <Progress
             percent={percentage}
             size="small"

@@ -53,11 +53,7 @@ const ReportTable = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <FaEye
-          onClick={() => setIsModalOpen(true)}
-          className="mx-auto "
-          size={20}
-        />
+        <FaEye onClick={() => setIsModalOpen(true)} className=" " size={20} />
       ),
     },
   ];

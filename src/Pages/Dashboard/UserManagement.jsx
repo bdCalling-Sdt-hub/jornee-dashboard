@@ -169,7 +169,7 @@ const UserManagement = () => {
       dataIndex: "printView",
       key: "printView",
       render: (_, record) => (
-        <FaEye className="mx-auto" onClick={() => showModal(record)} />
+        <FaEye className="" onClick={() => showModal(record)} />
       ),
     },
   ];

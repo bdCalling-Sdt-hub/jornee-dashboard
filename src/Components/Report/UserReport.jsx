@@ -46,11 +46,7 @@ const UserReport = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <FaEye
-          className="mx-auto "
-          size={20}
-          onClick={() => setIsModalOpen(true)}
-        />
+        <FaEye className=" " size={20} onClick={() => setIsModalOpen(true)} />
       ),
     },
   ];
