@@ -4,13 +4,14 @@ import "./DashboardHome.css";
 
 import DailyOverviewChart from "./DailyOverviewChart";
 import { HiUserGroup } from "react-icons/hi";
-import { FaUserPlus } from "react-icons/fa6";
+import { FaUserGroup, FaUserPlus } from "react-icons/fa6";
 import { LuBox } from "react-icons/lu";
 import { TbDatabaseDollar } from "react-icons/tb";
-
+import { RxCountdownTimer } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import trendingImage from "../../../assets/trendingUp.png";
-
+import { CiBookmarkPlus } from "react-icons/ci";
+import { PiNotebookThin } from "react-icons/pi";
 function DashboardHome() {
   const onChange = (pageNumber) => {
     console.log("Page: ", pageNumber);
@@ -18,128 +19,79 @@ function DashboardHome() {
 
   const data = [
     {
-      name: "New Seller",
-      count: "22,065",
-      icon: <HiUserGroup color="#00B2DC" size={32} />,
-      title2: (
-        <div className="text-[#606060] text-lg">
-          {" "}
-          <span className="text-[#00B69B] font-semibold"> 8.5%</span> Up from
-          yesterday
-        </div>
-      ),
-      bgColor: "#E2F7FC",
+      name: "Total User",
+      total: "22,065",
+      icon: <FaUserGroup color="#8280FF" size={32} />,
+      bgColor: "#E4E4FF",
     },
     {
-      name: "Active Seller",
-      count: "32,307",
-      icon: <FaUserPlus color="#F98002" size={32} />,
-      title2: (
-        <div className="text-[#606060] text-lg">
-          {" "}
-          <span className="text-[#00B69B] font-semibold"> 7.5%</span> Up from
-          yesterday
-        </div>
-      ),
-      bgColor: "#FFE3C7",
-    },
-    {
-      name: "Total Seller",
-      count: "12,000",
+      name: "Total Test Token",
+      total: "32,307",
       icon: <LuBox color="#FEC53D" size={32} />,
-      title2: (
-        <div className="text-[#606060] text-lg">
-          {" "}
-          <span className="text-[#00B69B] font-semibold"> 6.5%</span> Up from
-          yesterday
-        </div>
-      ),
-      bgColor: "#FFF3D6",
+    
+      bgColor: "#FEF2D6",
     },
     {
-      name: "Total Profit",
-      count: "1000",
-      title2: (
-        <div className="text-[#606060] text-lg">
-          {" "}
-          <span className="text-[#00B69B] font-semibold"> 8.5%</span> Up from
-          yesterday
-        </div>
-      ),
-      icon: <TbDatabaseDollar color="#5664FD" size={32} />,
-      bgColor: "#DDE0FF",
+      name: "Total Subscription",
+      total: "12,000",
+      icon: <CiBookmarkPlus  color="#4AD991" size={32} />,
+      
+      bgColor: "#D9F7E7",
     },
     {
-      name: "Active Seller",
-      count: "320",
-      icon: <FaUserPlus color="#F98002" size={32} />,
-      title2: (
-        <div className="text-[#606060] text-lg">
-          {" "}
-          <span className="text-[#00B69B] font-semibold"> 8.5%</span> Up from
-          yesterday
-        </div>
-      ),
-      bgColor: "#FFE3C7",
+      name: "Total Earning",
+      total: "1000",
+    
+      icon: <RxCountdownTimer color="#FF9066" size={32} />,
+      bgColor: "#FFDED2",
     },
     {
-      name: "Total Seller",
-      count: "120",
-      icon: <LuBox color="#FEC53D" size={32} />,
-      title2: (
-        <div className="text-[#606060] text-lg">
-          {" "}
-          <span className="text-[#00B69B] font-semibold"> 6.5%</span> Up from
-          yesterday
-        </div>
-      ),
-      bgColor: "#FFF3D6",
+      name: "Test Token Today",
+      total: "320",
+      icon: <PiNotebookThin color="#5DD1D9" size={32} />,
+     
+      bgColor: "#D6F7FE",
     },
     {
-      name: "Total Profit",
-      count: "1000",
-      title2: (
-        <div className="text-[#606060] text-lg">
-          {" "}
-          <span className="text-[#00B69B] font-semibold"> 5.5%</span> Up from
-          yesterday
-        </div>
-      ),
-      icon: <TbDatabaseDollar color="#5664FD" size={32} />,
-      bgColor: "#DDE0FF",
+      name: "New Subscription",
+      total: "120",
+      icon:  <CiBookmarkPlus  color="#9920D2" size={32} />,
+     
+      bgColor: "#EDD9F7",
+    },
+    {
+      name: "Today Earning",
+      total: "1000",
+      
+      icon: <RxCountdownTimer color="#F55011" size={32} />,
+      bgColor: "#EFD2D4",
     }, 
     {
       name: "Total Monthly Earning",
-      count: "22,065",
-      icon: <HiUserGroup color="#00B2DC" size={32} />,
-      title2: (
-        <div className="text-[#606060] text-lg">
-          {" "}
-          <span className="text-[#00B69B] font-semibold"> 8.5%</span> Up from
-          yesterday
-        </div>
-      ),
+      total: "22,065",
+      icon: <RxCountdownTimer color="#1890FF" size={32} />,
+    
       bgColor: "#E2F7FC",
     },
   ];
 
   return (
-    <div className=" p-10">
+    <div className="p-10">
       <h1 className="pb-6 text-3xl font-semibold">Overview</h1>
-      <div className=" grid grid-cols-4 gap-7 ">
+      <div className=" grid grid-cols-4  gap-7  ">
         {data.map((item, index) => (
           <div key={index}>
-            <div className="bg-white p-6 rounded-lg">
-              <div className=" flex justify-between items-center leading-loose">
+            <div className="bg-white p-4 h-[100%] flex items-center justify-between rounded-lg">
+              <div className=" flex justify-between  items-center leading-loose">
                 <div className="leading-loose">
                   <p
                     style={{
-                      fontSize: "18px",
-                      fontWeight: "400",
+                      fontSize: "16px",
+                      fontWeight: "600",
                       color: "#6A6D7C",
                     }}
                   >
-                    {item.name}
+                    {item?.name}
                   </p>
 
                   <p
@@ -149,7 +101,7 @@ function DashboardHome() {
                       color: "black",
                     }}
                   >
-                    {item.count}
+                    {item?.total}
                   </p>
                 </div>
                 <div
@@ -167,10 +119,7 @@ function DashboardHome() {
                 </div>
               </div>
 
-              <div className="flex gap-1 items-center">
-                <img src={trendingImage} alt="" />
-                <p>{item?.title2} </p>
-              </div>
+             
             </div>
           </div>
         ))}
