@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import BackButton from "../BackButton";
 import { Form, Input, Button } from "antd";
-import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+import { MdEdit, MdOutlineAddPhotoAlternate } from "react-icons/md";
 import Swal from "sweetalert2";
 
 const Profile = () => {
@@ -29,8 +29,8 @@ const Profile = () => {
     setImage(file);
   };
   const initialFormValues = {
-    fullName: "Nadir Hossain",
-    email: "nadirhossain336@gmail.com",
+    name: "Daniel Navaes",
+    email: "danielnavaes@gmail.com",
     mobile_number: "01756953936",
   };
 
@@ -56,11 +56,10 @@ const Profile = () => {
           <label
             htmlFor="img"
             style={{
-              width: "220px",
+              width: "200px",
               cursor: "pointer",
-              height: "180px",
-              borderRadius: "18px",
-              border: "1px dashed #4C535F",
+              height: "200px",
+              borderRadius: "100%",
               background: "white",
               backgroundImage: `url(${imgURL})`,
               backgroundSize: "cover",
@@ -69,18 +68,14 @@ const Profile = () => {
           >
             <div
               style={{
-                background: "rgba(0, 0, 0, 0.4)",
+                // background: "rgba(0, 0, 0, 0.4)",
                 width: "100%",
                 height: "100%",
-                borderRadius: "18px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
+                borderRadius: "100%",
+                position : "relative"
               }}
             >
-              <MdOutlineAddPhotoAlternate size={36} color="white" />
-              <p style={{ color: "white", marginTop: "12px" }}>Edit Photo</p>
+              <MdEdit size={25} className="bg-[#7D4C48] rounded-full p-1 absolute bottom-10 right-0" color="white " />
             </div>
           </label>
         </div>
@@ -97,16 +92,15 @@ const Profile = () => {
             <div className=" grid grid-cols-2 gap-x-16 w-full gap-y-4 pt-5">
               <div style={{ marginBottom: "20px" }}>
                 <label style={{ display: "block", marginBottom: "5px" }}>
-                  Full Name
+                  Your Name
                 </label>
-                <Form.Item style={{ marginBottom: 0 }} name="fullName">
+                <Form.Item style={{ marginBottom: 0 }} name="name">
                   <Input
-                    placeholder="Enter Your Full Name"
+                    placeholder="Enter Your  Name"
                     type="text"
                     style={{
                       border: "1px solid #E0E4EC",
                       height: "52px",
-
                       background: "white",
                       borderRadius: "8px",
                       outline: "none",
@@ -120,12 +114,12 @@ const Profile = () => {
                   style={{ display: "block", marginBottom: "5px" }}
                   htmlFor=""
                 >
-                  EmaiUser
+                  User Name
                 </label>
-                <Form.Item name="email" style={{ marginBottom: 0 }}>
+                <Form.Item name="userName" style={{ marginBottom: 0 }}>
                   <Input
                     type="text"
-                    placeholder="Enter Email"
+                    placeholder="Enter User Name"
                     style={{
                       border: "1px solid #E0E4EC",
                       height: "52px",
@@ -139,12 +133,12 @@ const Profile = () => {
 
               <div style={{ marginBottom: "40px" }}>
                 <label style={{ marginBottom: "5px" }} htmlFor="email">
-                  Phone Number
+                  Email
                 </label>
-                <Form.Item style={{ marginBottom: 0 }} name="mobile_number">
+                <Form.Item style={{ marginBottom: 0 }} name="email">
                   <Input
                     type="text"
-                    placeholder="Enter Phone Number"
+                    placeholder="Enter Your Email"
                     style={{
                       border: "1px solid #E0E4EC",
                       height: "52px",
@@ -166,6 +160,7 @@ const Profile = () => {
                 <Form.Item name="password" style={{ marginBottom: 0 }}>
                   <Input.Password
                     type="password"
+                    placeholder="Enter Your Password"
                     style={{
                       border: "1px solid #E0E4EC",
                       height: "52px",

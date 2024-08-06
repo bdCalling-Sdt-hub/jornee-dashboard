@@ -1,5 +1,4 @@
 import React from "react";
-import BackButton from "../BackButton";
 import Profile from "./Profile";
 import ChangePassword from "./ChangePassword";
 import { Tabs } from "antd";
@@ -22,10 +21,8 @@ const Setting = () => {
     },
   ];
   return (
-    <div>
-      <div style={{ margin: "25px 0" }}>
-        <BackButton link="/" />
-      </div>
+    <div className="mx-5">
+      
       <div
         style={{ marginBottom: "16px" }}
         className=" mt-5 bg-white p-5 px-10 rounded-xl "
