@@ -32,6 +32,27 @@
   border: 0;
 }
 
+
+/* :where(.css-dev-only-do-not-override-djtmh8).ant-pagination .ant-pagination-disabled .ant-pagination-item-link, :where(.css-dev-only-do-not-override-djtmh8).ant-pagination .ant-pagination-disabled:hover .ant-pagination-item-link {
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+  background-color: #919EAB;
+  color: white;
+} */
+
+
+
+.custom-pagination .ant-pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.custom-pagination .ant-pagination .ant-pagination-item-active a {
+  background-color: white;
+  color: #7D4C48 !important;
+  border: 1px solid #7D4C48;
+}
+
 .ant-pagination .ant-pagination-item-active a{
   background-color: #6C6C6C ;
   color: white !important;

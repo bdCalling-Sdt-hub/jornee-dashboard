@@ -1,11 +1,11 @@
 import { Form, Input, Modal, Table, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { MdOutlineDelete } from "react-icons/md";
-import BackButton from "./BackButton";
-import { FaEdit } from "react-icons/fa";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { RiDeleteBinLine } from "react-icons/ri";
 import EditSubscriptionModal from "../../Components/EditSubscriptionModal";
 import AddUserModal from "../../Components/AddUserModal";
+import { CiEdit } from "react-icons/ci";
 const data = [
   {
     key: "1",
@@ -94,7 +94,7 @@ const SubscriptMangement = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <RiDeleteBinLine className=" text-red-600" size={20} />
+        <RiDeleteBinLine className=" text-red-600 cursor-pointer" size={20} />
       ),
     },
   ];
@@ -109,16 +109,16 @@ const SubscriptMangement = () => {
       dataIndex: "delete",
       key: "delete",
       render: (_, record) => (
-        <FaEdit className="" onClick={() => handleEditData(record)} />
+        <CiEdit className="cursor-pointer " onClick={() => handleEditData(record)} />
       ),
     },
   ];
 
   return (
     <div>
-      <div style={{ margin: "24px 0" }}>
+      {/* <div style={{ margin: "24px 0" }}>
         <BackButton link="/" />
-      </div>
+      </div> */}
 
       <div>
         <h1
@@ -151,26 +151,7 @@ const SubscriptMangement = () => {
           >
             Add Subscription Free User
           </h1>
-          <Button
-            onClick={() => setOpenModal(true)}
-            type="primary"
-            htmlType="submit"
-            block
-            style={{
-              border: "none",
-              width: "45px",
-              height: "45px",
-              background: "#7D4C48",
-              color: "white",
-              borderRadius: "100%",
-              outline: "none",
-              textAlign: "center",
-              justifyItems: "center",
-            }}
-            className="text-2xl shadow-lg text-center"
-          >
-            +
-          </Button>
+
         </div>
 
         <Table columns={columns} dataSource={data} pagination={false} />
@@ -183,6 +164,29 @@ const SubscriptMangement = () => {
       />
 
       <AddUserModal openModal={openModal} setOpenModal={setOpenModal} />
+      <div className="flex justify-end  py-5">
+        <p
+          onClick={() => setOpenModal(true)}
+          type="primary"
+          htmlType="submit"
+          block
+          style={{
+            // border: "none",
+            // backgroundColor :  'white',
+            // width: "45px",
+            // height: "45px",
+            
+            // borderRadius: "100%",
+            // outline: "none",
+            // textAlign: "center",
+            // justifyItems: "center",
+            cursor : "pointer"
+          }}
+          className="text-2xl text-center"
+        >
+          <IoMdAddCircleOutline />
+        </p>
+      </div>
     </div>
   );
 };

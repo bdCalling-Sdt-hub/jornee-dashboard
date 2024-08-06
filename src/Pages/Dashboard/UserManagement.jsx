@@ -127,7 +127,22 @@ const UserData = [
   },
 ];
 
+
+
+
 const UserManagement = () => {
+
+  const components = {
+    header: {
+      cell: (props) => (
+        <th {...props} style={{ backgroundColor: '#FFFFFF' }}>
+          {props.children}
+        </th>
+      ),
+    },
+  };
+
+
   const [page, setPage] = useState(
     new URLSearchParams(window.location.search).get("page") || 1
   );
@@ -182,10 +197,10 @@ const UserManagement = () => {
   };
 
   return (
-    <div>
-      <div style={{ marginBottom: "16px" }} className=" mt-5">
+    <div className="bg-[#F1F2F6]">
+      {/* <div style={{ marginBottom: "16px" }} className=" mt-5">
         <BackButton link="/" />
-      </div>
+      </div> */}
       <div
         style={{
           background: "white",
@@ -201,11 +216,12 @@ const UserManagement = () => {
             padding: "10px",
           }}
         >
-          User Test Report
+          User List
         </h1>
 
-        <div>
+        <div className="custom-pagination">
           <Table
+          components={components}
             columns={UserColumns}
             dataSource={UserData}
             className="text-center"
