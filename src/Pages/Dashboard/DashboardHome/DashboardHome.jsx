@@ -78,12 +78,12 @@ function DashboardHome() {
   return (
     <div className="p-10">
       <h1 className="pb-6 text-3xl font-semibold">Overview</h1>
-      <div className=" grid grid-cols-4  gap-7  ">
+      <div className=" grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4   gap-7  ">
         {data.map((item, index) => (
           <div key={index}>
-            <div className="bg-white p-4 h-[100%] flex items-center justify-between rounded-lg">
+            <div className="bg-white p-4 h-[100%]  rounded-lg">
               <div className=" flex justify-between  items-center leading-loose">
-                <div className="leading-loose">
+                <div className="leading-loose ">
                   <p
                     style={{
                       fontSize: "16px",

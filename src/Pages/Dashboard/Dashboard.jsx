@@ -267,7 +267,7 @@ const Dashboard = () => {
         <Content
           style={{
             marginTop: "60px",
-            marginLeft: "17%",
+            marginLeft: "20%",
             background: "#F1F2F6",
             overflow: "auto",
             padding: "20px",
