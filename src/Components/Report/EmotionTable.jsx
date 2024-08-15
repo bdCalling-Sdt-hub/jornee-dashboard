@@ -1,32 +1,17 @@
 import { Progress, Table } from "antd";
-import React from "react";
-const data = [
-  {
-    key: "1",
-    optionName: "Joy",
-    percentage: 30,
-    color: "#EBAB04",
-  },
-  {
-    key: "2",
-    optionName: "Trust",
-    percentage: 40,
-    color: "#E0690E",
-  },
-  {
-    key: "3",
-    optionName: "Anger",
-    percentage: 50,
-    color: "#A4341B",
-  },
-  {
-    key: "4",
-    optionName: "Fear",
-    percentage: 30,
-    color: "#7D933E",
-  },
-];
+import { useReportEmotionsQuery } from "../../redux/api/dashboardApi";
+
+
 const EmotionTable = () => {
+
+  const  colorCodes = ['#EBAB04', "#E0690E","#A4341B", "#7D933E"];
+  const {data  : reportEmotionData,error,isLoading} = useReportEmotionsQuery()
+  const formattedData = reportEmotionData?.data?.map((item,i) => ({
+    key : i+1, 
+    optionName : item?.emotion,
+    percentage : item?.percentage,
+    color : colorCodes[i]
+  }))
   const columns = [
     {
       title: "S.No",
@@ -71,7 +56,7 @@ const EmotionTable = () => {
   ];
   return (
     <div>
-      <Table columns={columns} dataSource={data} pagination={false} />
+      <Table columns={columns} dataSource={formattedData} pagination={false} />
     </div>
   );
 };

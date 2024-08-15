@@ -31,8 +31,15 @@ const dashboardApi = baseApi.injectEndpoints({
                 method : "GET"
             }),
             providesTags : ['subscriptionPlan']
+        }),
+        ReportEmotions : builder.query({
+            query : ()=>({
+                url : 'feelings/emotions-overview',
+                method : "GET"
+            }),
+            providesTags : ['reportEmotion']
         })
     })
 })
 
-export const { useOverViewQuery, useEarningAnalyticsQuery,useAllUsersQuery, useSubscriptionPlanQuery } = dashboardApi;
+export const { useOverViewQuery, useEarningAnalyticsQuery,useAllUsersQuery, useSubscriptionPlanQuery,useReportEmotionsQuery } = dashboardApi;

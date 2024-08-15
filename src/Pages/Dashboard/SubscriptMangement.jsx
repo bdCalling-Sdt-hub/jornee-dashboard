@@ -81,7 +81,7 @@ const SubscriptMangement = () => {
   }
 
   const handleEditData = (value) => {
-    console.log(value);
+    // console.log(value);
     setEditData(value);
     setOpenAddModel(true);
   };
@@ -108,7 +108,9 @@ const SubscriptMangement = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <RiDeleteBinLine className=" text-red-600 cursor-pointer" size={20} />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <RiDeleteBinLine className=" text-red-600 cursor-pointer" size={20} />
+        </div>
       ),
     },
   ];
@@ -123,7 +125,9 @@ const SubscriptMangement = () => {
       dataIndex: "delete",
       key: "delete",
       render: (_, record) => (
-        <CiEdit size={25} className="cursor-pointer " onClick={() => handleEditData(record)} />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <CiEdit size={25} className="cursor-pointer " onClick={() => handleEditData(record)} />
+        </div>
       ),
     },
   ];
