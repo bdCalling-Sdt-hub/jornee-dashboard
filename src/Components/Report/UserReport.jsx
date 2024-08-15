@@ -2,6 +2,7 @@ import { Table } from "antd";
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import UserReportModal from "./UserReportModal";
+import { useAllUserReportQuery, useReportEmotionsQuery } from "../../redux/api/dashboardApi";
 const data = [
   {
     key: "1",
@@ -26,6 +27,13 @@ const data = [
 ];
 const UserReport = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const {data : allUserReport, error, isLoading} =  useAllUserReportQuery()
+  // const {data  : reportEmotionData,error,isLoading} = useReportEmotionsQuery()
+
+  const tableFormattedData = allUserReport?.data?.map(items => ({
+    
+  }))
+  console.log(allUserReport)
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
   };
@@ -46,7 +54,9 @@ const UserReport = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
+        <div className="flex justify-center">
         <FaEye className=" " size={20} onClick={() => setIsModalOpen(true)} />
+        </div>
       ),
     },
   ];

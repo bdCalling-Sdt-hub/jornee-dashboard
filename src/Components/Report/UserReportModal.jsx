@@ -20,6 +20,7 @@ const UserReportModal = ({ isModalOpen, setIsModalOpen }) => {
         footer={false}
       >
         <Slider {...settings}>
+         
           <div className=" px-3 py-4">
             <h3 className=" text-lg font-medium pb-2 ">Emotions</h3>
             <div className=" flex items-center gap-3 ">

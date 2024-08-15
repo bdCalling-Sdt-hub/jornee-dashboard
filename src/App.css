@@ -94,3 +94,6 @@
   width: 100% !important;
   height: 190px !important;
 }
+.slick-prev, .slick-next {
+  background-color: red;
+}
