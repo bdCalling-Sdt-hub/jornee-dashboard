@@ -4,12 +4,27 @@ import React from "react";
 import login from "../../assets/Login.png";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useGetUserMutation } from "../../redux/api/userApi";
 
 const Login = () => {
+  const [getUser, { data, isLoading, isSuccess, isError }] = useGetUserMutation();
   const navigate = useNavigate();
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-    navigate("/");
+  // console.log(getUser())
+  const onFinish = async (values) => {
+    try {
+      const response = await getUser({ email: values.email, password: values.password }).unwrap();
+      // console.log(response?.data?.accessToken)
+      if (response?.data?.accessToken) {
+        // Store token in localStorage
+        localStorage.setItem('accessToken', JSON.stringify(response?.data?.accessToken));
+        navigate("/");
+      } else {
+        console.error('Login failed: No token received');
+      }
+    } catch (error) {
+      console.error('Login failed: ', error);
+    }
+    // navigate("/");
   };
 
   return (

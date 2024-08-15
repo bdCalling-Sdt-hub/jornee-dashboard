@@ -12,7 +12,11 @@ import { Link } from "react-router-dom";
 import trendingImage from "../../../assets/trendingUp.png";
 import { CiBookmarkPlus } from "react-icons/ci";
 import { PiNotebookThin } from "react-icons/pi";
+import { useOverViewQuery } from "../../../redux/api/dashboardApi";
 function DashboardHome() {
+
+  const {data : overView, error, isLoading} = useOverViewQuery()
+  // console.log(overView)
   const onChange = (pageNumber) => {
     console.log("Page: ", pageNumber);
   };
@@ -20,55 +24,55 @@ function DashboardHome() {
   const data = [
     {
       name: "Total User",
-      total: "22,065",
+      total: overView?.data?.users,
       icon: <FaUserGroup color="#8280FF" size={32} />,
       bgColor: "#E4E4FF",
     },
     {
       name: "Total Test Token",
-      total: "32,307",
+      total: overView?.data?.totalTest,
       icon: <LuBox color="#FEC53D" size={32} />,
     
       bgColor: "#FEF2D6",
     },
     {
       name: "Total Subscription",
-      total: "12,000",
+      total: overView?.data?.totalSubscriptions,
       icon: <CiBookmarkPlus  color="#4AD991" size={32} />,
       
       bgColor: "#D9F7E7",
     },
     {
       name: "Total Earning",
-      total: "1000",
+      total: overView?.data?.todaysEarning,
     
       icon: <RxCountdownTimer color="#FF9066" size={32} />,
       bgColor: "#FFDED2",
     },
     {
       name: "Test Token Today",
-      total: "320",
+      total: overView?.data?.todaysTestCount,
       icon: <PiNotebookThin color="#5DD1D9" size={32} />,
      
       bgColor: "#D6F7FE",
     },
     {
       name: "New Subscription",
-      total: "120",
+      total: overView?.data?.newSubscribers,
       icon:  <CiBookmarkPlus  color="#9920D2" size={32} />,
      
       bgColor: "#EDD9F7",
     },
     {
       name: "Today Earning",
-      total: "1000",
+      total: overView?.data?.todaysEarning,
       
       icon: <RxCountdownTimer color="#F55011" size={32} />,
       bgColor: "#EFD2D4",
     }, 
     {
       name: "Total Monthly Earning",
-      total: "22,065",
+      total: overView?.data?.totalMonthlyIncome,
       icon: <RxCountdownTimer color="#1890FF" size={32} />,
     
       bgColor: "#E2F7FC",
