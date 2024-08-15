@@ -6,6 +6,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import EditSubscriptionModal from "../../Components/EditSubscriptionModal";
 import AddUserModal from "../../Components/AddUserModal";
 import { CiEdit } from "react-icons/ci";
+import { useSubscriptionPlanQuery } from "../../redux/api/dashboardApi";
 const data = [
   {
     key: "1",
@@ -53,12 +54,25 @@ const subscriptionData = [
 ];
 
 const SubscriptMangement = () => {
+  // Fetch Edit Subscription Plan Data 
+  const { data: subscriptionPlans, error, isLoading } = useSubscriptionPlanQuery()
+  console.log(subscriptionPlans)
+
+
   const [openAddModel, setOpenAddModel] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [reFresh, setReFresh] = useState("");
   const [editData, setEditData] = useState();
 
-  console.log(editData);
+
+  // Edit subscription plan formatted Data 
+  const editSubscriptionPlanFormattedData = subscriptionPlans?.data?.map((plans, i) => ({
+    key: i + 1,
+    packageName: plans?.packageName,
+    price: plans?.packagePrice
+
+  }))
+
 
   if (reFresh) {
     setTimeout(() => {
@@ -109,16 +123,14 @@ const SubscriptMangement = () => {
       dataIndex: "delete",
       key: "delete",
       render: (_, record) => (
-        <CiEdit className="cursor-pointer " onClick={() => handleEditData(record)} />
+        <CiEdit size={25} className="cursor-pointer " onClick={() => handleEditData(record)} />
       ),
     },
   ];
 
   return (
-    <div>
-      {/* <div style={{ margin: "24px 0" }}>
-        <BackButton link="/" />
-      </div> */}
+    <div className="mt-5">
+
 
       <div>
         <h1
@@ -128,14 +140,16 @@ const SubscriptMangement = () => {
             color: "#2F2F2F",
             padding: "10px",
           }}
+          className="mb-2"
         >
           Edit Subscription Plan
         </h1>
 
         <Table
           columns={subscriptionColumns}
-          dataSource={subscriptionData}
+          dataSource={editSubscriptionPlanFormattedData}
           pagination={false}
+
         />
       </div>
 
@@ -175,12 +189,12 @@ const SubscriptMangement = () => {
             // backgroundColor :  'white',
             // width: "45px",
             // height: "45px",
-            
+
             // borderRadius: "100%",
             // outline: "none",
             // textAlign: "center",
             // justifyItems: "center",
-            cursor : "pointer"
+            cursor: "pointer"
           }}
           className="text-2xl text-center"
         >

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "./BackButton";
-
 import { Button, Modal, Table } from "antd";
-import { EyeOutlined } from "@ant-design/icons";
-import { FaEye } from "react-icons/fa6";
+import { IoEyeOutline } from "react-icons/io5";
+import { useAllUsersQuery } from "../../redux/api/dashboardApi";
 
 const UserData = [
   {
@@ -12,119 +11,7 @@ const UserData = [
     email: "tushar@gmail.com",
     status: "active",
     joinDate: "15 july 2024",
-  },
-  {
-    key: "2",
-    name: "Rahman",
-    email: "rahman@gmail.com",
-    status: "active",
-    joinDate: "17 july 2024",
-  },
-  {
-    key: "3",
-    name: "Rafsan",
-    email: "rafsan@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "4",
-    name: "jusef",
-    email: "jusef@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "5",
-    name: "Asad",
-    email: "asad@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "6",
-    name: "Fahim",
-    email: "fahim@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "7",
-    name: "Nadir",
-    email: "nadir@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "8",
-    name: "Tushar",
-    email: "tushar@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "9",
-    name: "Rahman",
-    email: "rahman@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "10",
-    name: "Rafsan",
-    email: "rafsan@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "11",
-    name: "jusef",
-    email: "jusef@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "12",
-    name: "Asad",
-    email: "asad@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "13",
-    name: "Fahim",
-    email: "fahim@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "14",
-    name: "Nadir",
-    email: "nadir@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "15",
-    name: "Asad",
-    email: "asad@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "16",
-    name: "Fahim",
-    email: "fahim@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
-  {
-    key: "17",
-    name: "Nadir",
-    email: "nadir@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  },
+  }
 ];
 
 
@@ -132,6 +19,28 @@ const UserData = [
 
 const UserManagement = () => {
 
+  const {data , error, isLoading} = useAllUsersQuery()
+  console.log(data)
+
+const formattedData = data?.data?.data?.map(user =>(
+  // console.log(user)
+  {
+    key : user?._id
+
+  }
+))
+console.log(formattedData)
+  // useEffect(() => {
+  //   const formattedData = data?.data?.data?.map((user, index) => ({
+  //     key: user._id,
+  //     name: user.email.split("@")[0], // Example logic to set name
+  //     email: user.email,
+  //     status: user.isActive ? "active" : "inactive",
+  //     joinDate: new Date(user.createdAt).toLocaleDateString(),
+  //   }));
+
+  //   setUserData(formattedData);
+  // }, []);
   const components = {
     header: {
       cell: (props) => (
@@ -184,7 +93,7 @@ const UserManagement = () => {
       dataIndex: "printView",
       key: "printView",
       render: (_, record) => (
-        <FaEye className="" onClick={() => showModal(record)} />
+        <IoEyeOutline size={20} className="" onClick={() => showModal(record)} />
       ),
     },
   ];
@@ -197,10 +106,7 @@ const UserManagement = () => {
   };
 
   return (
-    <div className="bg-[#F1F2F6]">
-      {/* <div style={{ marginBottom: "16px" }} className=" mt-5">
-        <BackButton link="/" />
-      </div> */}
+    <div className="bg-[#F1F2F6] mt-5">
       <div
         style={{
           background: "white",
@@ -229,6 +135,7 @@ const UserManagement = () => {
               pageSize: 10,
               defaultCurrent: parseInt(page),
               onChange: handlePageChange,
+              // total : 
             }}
           />
         </div>

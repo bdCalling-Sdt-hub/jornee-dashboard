@@ -1,10 +1,11 @@
 import { Button, Form, Input, Modal } from 'antd';
 import React from 'react';
 
-const EditSubscriptionModal = ({openAddModel ,setOpenAddModel , editData }) => {
-    return (
-        <div>
-             <Modal
+const EditSubscriptionModal = ({ openAddModel, setOpenAddModel, editData }) => {
+  // console.log(editData)
+  return (
+    <div>
+      <Modal
         centered
         open={openAddModel}
         onCancel={() => setOpenAddModel(false)}
@@ -15,7 +16,7 @@ const EditSubscriptionModal = ({openAddModel ,setOpenAddModel , editData }) => {
           <Form
             name="normal_login"
             initialValues={{
-              fullName: editData?.fullName,
+              fullName: editData?.packageName,
               price: editData?.price,
             }}
             className="text-center"
@@ -95,8 +96,8 @@ const EditSubscriptionModal = ({openAddModel ,setOpenAddModel , editData }) => {
           </Form>
         </div>
       </Modal>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default EditSubscriptionModal;

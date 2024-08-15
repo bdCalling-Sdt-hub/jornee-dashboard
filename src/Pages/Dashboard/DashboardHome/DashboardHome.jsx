@@ -12,11 +12,12 @@ import { Link } from "react-router-dom";
 import trendingImage from "../../../assets/trendingUp.png";
 import { CiBookmarkPlus } from "react-icons/ci";
 import { PiNotebookThin } from "react-icons/pi";
-import { useOverViewQuery } from "../../../redux/api/dashboardApi";
+import { useEarningAnalyticsQuery, useOverViewQuery } from "../../../redux/api/dashboardApi";
 function DashboardHome() {
 
-  const {data : overView, error, isLoading} = useOverViewQuery()
-  // console.log(overView)
+  const {data : overView, error, isLoading} = useOverViewQuery();
+  const {data  : earning, error: earningError, isLoading :  earningLoading} = useEarningAnalyticsQuery()
+  console.log(earning)
   const onChange = (pageNumber) => {
     console.log("Page: ", pageNumber);
   };
@@ -138,7 +139,7 @@ function DashboardHome() {
         }}
         className="w-full"
       >
-        <DailyOverviewChart />
+        <DailyOverviewChart earning={earning} />
       </div>
     </div>
   );
