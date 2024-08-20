@@ -10,29 +10,16 @@ import { useSubscriptionPlanQuery } from "../../redux/api/dashboardApi";
 const data = [
   {
     key: "1",
-    name: "Tushar",
     email: "tushar@gmail.com",
   },
   {
     key: "2",
-    name: "Rahman",
     email: "rahman@gmail.com",
   },
   {
     key: "3",
-    name: "Rafsan",
     email: "rafsan@gmail.com",
-  },
-  {
-    key: "4",
-    name: "jusef",
-    email: "jusef@gmail.com",
-  },
-  {
-    key: "5",
-    name: "Asad",
-    email: "asad@gmail.com",
-  },
+  }
 ];
 
 
@@ -76,14 +63,9 @@ const SubscriptMangement = () => {
       dataIndex: "key",
       key: "key",
     },
-    {
-      title: "User Name",
-      dataIndex: "name",
-      key: "name",
-    },
 
     {
-      title: "Email",
+      title: "Email or Id",
       dataIndex: "email",
       key: "email",
     },

@@ -16,33 +16,7 @@ const AddUserModal = ({openModal , setOpenModal}) => {
           
             className="text-center"
           >
-            <div style={{ marginBottom: "16px" }}>
-              <label
-                style={{
-                  display: "block",
-                  marginBottom: "5px",
-                  textAlign: "start",
-                  color: "black",
-                }}
-                className="text-lg font-medium"
-              >
-               User Name
-              </label>
-              <Form.Item style={{ marginBottom: 0 }} name="name">
-                <Input
-                  type="text" 
-                  placeholder='Enter your Name'
-                  style={{
-                    border: "1px solid #E0E4EC",
-                    height: "52px",
-                    background: "white",
-                    borderRadius: "8px",
-                    outline: "none",
-                    color: "black",
-                  }}
-                />
-              </Form.Item>
-            </div>
+            
 
             <div style={{ marginBottom: "16px" }}>
               <label
@@ -54,7 +28,7 @@ const AddUserModal = ({openModal , setOpenModal}) => {
                 }}
                 className="text-lg font-medium"
               >
-               Email
+               Email or Id
               </label>
               <Form.Item name="email" style={{ marginBottom: 0 }}>
                 <Input 
