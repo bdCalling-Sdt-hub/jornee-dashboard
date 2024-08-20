@@ -18,35 +18,46 @@ const dashboardApi = baseApi.injectEndpoints({
 
             providesTags: ['earningAnalytics']
         }),
-        allUsers :  builder.query({
-            query : ()=>({
-                url : 'dashboard/all-users',
-                method : "GET"
+        allUsers: builder.query({
+            query: ({ page = 1, limit = 10 }) => ({
+                url: `dashboard/all-users?page=${page}&limit=${limit}`,
+                method: "GET"
             }),
-            providesTags : ['allUsers']
+            providesTags: ['allUsers']
         }),
-        subscriptionPlan : builder.query({
-            query : ()=>({
-                url : 'subscription-plan/all-plans',
-                method : "GET"
+        subscriptionPlan: builder.query({
+            query: () => ({
+                url: 'subscription-plan/all-plans',
+                method: "GET"
             }),
-            providesTags : ['subscriptionPlan']
+            providesTags: ['subscriptionPlan']
         }),
-        ReportEmotions : builder.query({
-            query : ()=>({
-                url : 'feelings/emotions-overview',
-                method : "GET"
+        updateSubscriptionPlan: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `subscription-plan/edit-plans/${id}`,
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             }),
-            providesTags : ['reportEmotion']
+            invalidatesTags: ['subscriptionPlan']
         }),
-        allUserReport : builder.query({
-            query : ()=>({
-                url : 'feelings/user-report',
-                method : "GET"
+        ReportEmotions: builder.query({
+            query: () => ({
+                url: 'feelings/emotions-overview',
+                method: "GET"
             }),
-            providesTags : ["allUserReport"]
+            providesTags: ['reportEmotion']
+        }),
+        allUserReport: builder.query({
+            query: () => ({
+                url: 'feelings/user-report',
+                method: "GET"
+            }),
+            providesTags: ["allUserReport"]
         })
     })
 })
 
-export const { useOverViewQuery, useEarningAnalyticsQuery,useAllUsersQuery, useSubscriptionPlanQuery,useReportEmotionsQuery , useAllUserReportQuery} = dashboardApi;
+export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useUpdateSubscriptionPlanMutation, useAllUserReportQuery } = dashboardApi;

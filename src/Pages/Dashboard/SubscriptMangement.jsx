@@ -35,28 +35,11 @@ const data = [
   },
 ];
 
-const subscriptionData = [
-  {
-    key: 1,
-    packageName: "Per Month",
-    price: "250$",
-  },
-  {
-    key: 2,
-    packageName: "Per Year",
-    price: "400$",
-  },
-  {
-    key: 3,
-    packageName: "Per Week",
-    price: "150$",
-  },
-];
 
 const SubscriptMangement = () => {
   // Fetch Edit Subscription Plan Data 
-  const { data: subscriptionPlans, error, isLoading } = useSubscriptionPlanQuery()
-  console.log(subscriptionPlans)
+  const { data: subscriptionPlans, error, isLoading } = useSubscriptionPlanQuery();
+  // console.log(subscriptionPlans)
 
 
   const [openAddModel, setOpenAddModel] = useState(false);
@@ -64,9 +47,10 @@ const SubscriptMangement = () => {
   const [reFresh, setReFresh] = useState("");
   const [editData, setEditData] = useState();
 
-
+  // console.log(subscriptionPlans)
   // Edit subscription plan formatted Data 
   const editSubscriptionPlanFormattedData = subscriptionPlans?.data?.map((plans, i) => ({
+    id: plans?._id,
     key: i + 1,
     packageName: plans?.packageName,
     price: plans?.packagePrice
@@ -81,7 +65,7 @@ const SubscriptMangement = () => {
   }
 
   const handleEditData = (value) => {
-    // console.log(value);
+   
     setEditData(value);
     setOpenAddModel(true);
   };
@@ -189,15 +173,6 @@ const SubscriptMangement = () => {
           htmlType="submit"
           block
           style={{
-            // border: "none",
-            // backgroundColor :  'white',
-            // width: "45px",
-            // height: "45px",
-
-            // borderRadius: "100%",
-            // outline: "none",
-            // textAlign: "center",
-            // justifyItems: "center",
             cursor: "pointer"
           }}
           className="text-2xl text-center"

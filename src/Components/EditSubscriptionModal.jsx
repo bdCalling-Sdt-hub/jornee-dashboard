@@ -1,8 +1,40 @@
 import { Button, Form, Input, Modal } from 'antd';
 import React from 'react';
+import { useUpdateSubscriptionPlanMutation } from '../redux/api/dashboardApi';
 
 const EditSubscriptionModal = ({ openAddModel, setOpenAddModel, editData }) => {
-  // console.log(editData)
+  const [updateSubscriptionPlan] = useUpdateSubscriptionPlanMutation();
+
+  const [form] = Form.useForm();
+  // const handleSubmit = () => {
+  //   form
+  //     .validateFields() // Validate the form fields
+  //     .then(values => {
+  //       console.log(values)
+  //       // const id = values?.id
+  //       // console.log(values)
+  //       // const updateData = {
+  //       //   packageName: values?.packageName,
+  //       //   price: values?.price
+  //       // }
+  //       // console.log(updateData)
+  //       // updateSubscriptionPlan({ id, updateData })
+  //       // setOpenAddModel(false);
+  //     })
+  //     .catch(errorInfo => {
+  //       console.log('Form Validation Failed:', errorInfo);
+  //     });
+  // };
+
+  const onFinish = (value) => {
+    const id = editData?.id;
+    const updateData = {
+        packageName: value?.fullName,
+        packagePrice: value?.price.toString()
+    };
+    updateSubscriptionPlan({ id, data: updateData });
+    setOpenAddModel(false)
+}
   return (
     <div>
       <Modal
@@ -20,6 +52,7 @@ const EditSubscriptionModal = ({ openAddModel, setOpenAddModel, editData }) => {
               price: editData?.price,
             }}
             className="text-center"
+            onFinish={onFinish}
           >
             <div style={{ marginBottom: "16px" }}>
               <label
@@ -31,7 +64,7 @@ const EditSubscriptionModal = ({ openAddModel, setOpenAddModel, editData }) => {
                 }}
                 className="text-lg font-medium"
               >
-                Package Name
+                Package Names
               </label>
               <Form.Item style={{ marginBottom: 0 }} name="fullName">
                 <Input
@@ -78,7 +111,7 @@ const EditSubscriptionModal = ({ openAddModel, setOpenAddModel, editData }) => {
             <Form.Item className="w-full mt-10">
               <Button
                 type="primary"
-                htmlType="submit"
+                htmlType="Submit"
                 block
                 style={{
                   border: "none",
@@ -89,6 +122,7 @@ const EditSubscriptionModal = ({ openAddModel, setOpenAddModel, editData }) => {
                   borderRadius: "8px",
                   outline: "none",
                 }}
+              // onClick={handleSubmit}
               >
                 Submit
               </Button>

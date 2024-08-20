@@ -18,9 +18,16 @@ const UserData = [
 
 
 const UserManagement = () => {
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+  });
 
-  const {data , error, isLoading} = useAllUsersQuery()
-  console.log(data?.data?.data)
+  const {data , error, isLoading} = useAllUsersQuery({
+    page: pagination.current,
+    limit: pagination.pageSize,
+  })
+  console.log(data)
 
 const formattedData = data?.data?.data?.map((user,i) =>(
   // console.log(user)
@@ -33,18 +40,7 @@ const formattedData = data?.data?.data?.map((user,i) =>(
 
   }
 ))
-// console.log(formattedData)
-  // useEffect(() => {
-  //   const formattedData = data?.data?.data?.map((user, index) => ({
-  //     key: user._id,
-  //     name: user.email.split("@")[0], // Example logic to set name
-  //     email: user.email,
-  //     status: user.isActive ? "active" : "inactive",
-  //     joinDate: new Date(user.createdAt).toLocaleDateString(),
-  //   }));
 
-  //   setUserData(formattedData);
-  // }, []);
   const components = {
     header: {
       cell: (props) => (
@@ -102,10 +98,7 @@ const formattedData = data?.data?.data?.map((user,i) =>(
   ];
 
   const handlePageChange = (page) => {
-    setPage(page);
-    const params = new URLSearchParams(window.location.search);
-    params.set("page", page);
-    window.history.pushState(null, "", `?${params.toString()}`);
+    setPagination((prev) => ({ ...prev, current: page }));
   };
 
   return (
@@ -135,10 +128,12 @@ const formattedData = data?.data?.data?.map((user,i) =>(
             dataSource={formattedData}
             className="text-center"
             pagination={{
-              pageSize: 10,
-              defaultCurrent: parseInt(page),
+              // pageSize: 10,
+              // defaultCurrent: parseInt(page),
+              current: pagination.current,
+              pageSize: pagination.pageSize,
               onChange: handlePageChange,
-              // total : 
+              total : data?.data?.meta?.total || 0,
             }}
           />
         </div>
@@ -171,7 +166,7 @@ const formattedData = data?.data?.data?.map((user,i) =>(
           </div>
           <div className=" flex  w-full   text-lg ">
             <p className="font-semibold w-1/2"> Join Date</p>
-            <p className=" w-1/2"> {modalData?.joinDate}</p>
+            <p className=" w-1/2"> {modalData?.joinDate?.split('T')[0]}</p>
           </div>
         </div>
       </Modal>
