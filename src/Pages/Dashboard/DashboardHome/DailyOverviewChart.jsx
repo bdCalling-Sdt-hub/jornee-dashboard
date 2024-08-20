@@ -15,62 +15,73 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  {
-    name: "Jan",
-    pv: 0,
-  },
-  {
-    name: "Feb",
-    pv: 0,
-  },
-  {
-    name: "Mar",
-    pv: 9800,
-  },
-  {
-    name: "Apr",
-    pv: 3908,
-  },
-  {
-    name: "May",
-    pv: 9800,
-  },
-  {
-    name: "Jun",
-    pv: 5800,
-  },
-  {
-    name: "Jul",
-    pv: 8300,
-  },
-  {
-    name: "Aug",
-    pv: 4300,
-  },
-  {
-    name: "Sep",
-    pv: 8300,
-  },
-  {
-    name: "Oct",
-    pv: 4800,
-  },
-  {
-    name: "Nov",
-    pv: 6900,
-  },
-  {
-    name: "Dec",
-    pv: 4300,
-  },
-];
+
 
 export default function DailyRentChart({earning}) {
   const [year, setYear] = useState("Jan");
 
-  console.log(earning)
+  console.log(earning?.data)
 
+
+  const data2 = earning?.data?.map(ear => {
+    // console.log(ear)
+    return ({
+      name : ear?.month,
+      pv : ear?.totalAmount
+    })
+  })
+  console.log(data2)
+  const data = [
+    {
+      name: "Jan",
+      pv: 0,
+    },
+    {
+      name: "Feb",
+      pv: 0,
+    },
+    {
+      name: "Mar",
+      pv: 9800,
+    },
+    {
+      name: "Apr",
+      pv: 3908,
+    },
+    {
+      name: "May",
+      pv: 9800,
+    },
+    {
+      name: "Jun",
+      pv: 5800,
+    },
+    {
+      name: "Jul",
+      pv: 8300,
+    },
+    {
+      name: "Aug",
+      pv: 4300,
+    },
+    {
+      name: "Sep",
+      pv: 8300,
+    },
+    {
+      name: "Oct",
+      pv: 4800,
+    },
+    {
+      name: "Nov",
+      pv: 6900,
+    },
+    {
+      name: "Dec",
+      pv: 4300,
+    },
+  ];
+ 
   const items = [
     {
       label: "Jan",
@@ -167,7 +178,7 @@ export default function DailyRentChart({earning}) {
         <AreaChart
           width={500}
           height={200}
-          data={data}
+          data={data2}
           syncId="anyId"
           margin={{
             top: 10,

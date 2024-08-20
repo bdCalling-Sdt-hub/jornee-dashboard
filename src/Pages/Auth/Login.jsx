@@ -9,11 +9,11 @@ import { useGetUserMutation } from "../../redux/api/userApi";
 const Login = () => {
   const [getUser, { data, isLoading, isSuccess, isError }] = useGetUserMutation();
   const navigate = useNavigate();
-  // console.log(getUser())
   const onFinish = async (values) => {
+    console.log(values)
     try {
       const response = await getUser({ email: values.email, password: values.password }).unwrap();
-      // console.log(response?.data?.accessToken)
+      console.log(response?.data?.accessToken)
       if (response?.data?.accessToken) {
         // Store token in localStorage
         localStorage.setItem('accessToken', JSON.stringify(response?.data?.accessToken));

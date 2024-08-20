@@ -11,7 +11,7 @@ const UserReport = () => {
   // const {data  : reportEmotionData,error,isLoading} = useReportEmotionsQuery()
 
 
-  console.log(allUserReport?.data?.result)
+  // console.log(allUserReport?.data?.result)
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
   };
@@ -23,6 +23,7 @@ const UserReport = () => {
       title: "S.No",
       dataIndex: "key",
       key: "key",
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Anonymous User",

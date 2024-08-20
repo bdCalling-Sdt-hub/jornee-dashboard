@@ -20,16 +20,20 @@ const UserData = [
 const UserManagement = () => {
 
   const {data , error, isLoading} = useAllUsersQuery()
-  console.log(data)
+  console.log(data?.data?.data)
 
-const formattedData = data?.data?.data?.map(user =>(
+const formattedData = data?.data?.data?.map((user,i) =>(
   // console.log(user)
   {
-    key : user?._id
+    key : i+1,
+    name : user?.role,
+    email : user?.email ? user?.email : user?.appId,
+    status : user?.isActive ? "Active" : "Deactivate",
+    joinDate : user?.createdAt
 
   }
 ))
-console.log(formattedData)
+// console.log(formattedData)
   // useEffect(() => {
   //   const formattedData = data?.data?.data?.map((user, index) => ({
   //     key: user._id,
@@ -60,7 +64,6 @@ console.log(formattedData)
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = (value) => {
-    console.log(value);
     setModalData(value);
     setIsModalOpen(true);
   };
@@ -129,7 +132,7 @@ console.log(formattedData)
           <Table
           components={components}
             columns={UserColumns}
-            dataSource={UserData}
+            dataSource={formattedData}
             className="text-center"
             pagination={{
               pageSize: 10,

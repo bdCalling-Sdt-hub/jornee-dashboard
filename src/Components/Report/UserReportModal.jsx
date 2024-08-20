@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const UserReportModal = ({ isModalOpen, setIsModalOpen,  selected_data }) => {
-  console.log(selected_data)
   const colors = ['#EBAB04',"#e96e34","#873058"]
   const emotions = selected_data?.emotions?.map((value, i) => (
     {
@@ -14,14 +13,13 @@ const UserReportModal = ({ isModalOpen, setIsModalOpen,  selected_data }) => {
 
     }
   ))
-  console.log(emotions)
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  // };
   return (
     <div>
       <Modal
