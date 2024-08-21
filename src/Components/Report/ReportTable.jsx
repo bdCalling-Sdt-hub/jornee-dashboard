@@ -1,6 +1,7 @@
 import { Modal, Progress, Table } from "antd";
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
+import {  useReportTestNameQuery } from "../../redux/api/dashboardApi";
 const data = [
   {
     key: "1",
@@ -29,7 +30,24 @@ const data = [
   },
 ];
 const ReportTable = () => {
+  const {data : reports, error, loading} = useReportTestNameQuery()
+console.log(reports)
+  const tableData = reports?.data?.map((report, i)=>({
+    key : i+1,
+    testName : report?.name,
+    percentage : report?.totalPercentage,
+    likelyUnmet : report?.likelyUnmet,
+    moderateUnmet : report?. moderateUnmet,
+    wellUnmet : report?.wellUnmet
+
+  }))
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalValue, setModalValue] = useState()
+  console.log(modalValue)
+  const handleModal = (value)=>{
+    setIsModalOpen(true)
+    setModalValue(value)
+  }
   const columns = [
     {
       title: "S.No",
@@ -53,7 +71,7 @@ const ReportTable = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <FaEye onClick={() => setIsModalOpen(true)} className=" " size={20} />
+        <FaEye onClick={() =>handleModal(record)} className=" " size={20} />
       ),
     },
   ];
@@ -61,7 +79,7 @@ const ReportTable = () => {
   return (
     <div>
       <div>
-        <Table columns={columns} dataSource={data} pagination={false} />
+        <Table columns={columns} dataSource={tableData} pagination={false} />
 
         {/* modal   */}
 
@@ -74,17 +92,17 @@ const ReportTable = () => {
 
           <div className=" w-3/4 pb-3">
             <p className=" text-md">Likely Unmet</p>
-            <Progress percent={50} size="small" />
+            <Progress percent={modalValue?.likelyUnmet} size="small" />
           </div>
 
           <div className=" w-3/4 pb-3">
             <p className=" text-md">Moderately Unmet</p>
-            <Progress percent={60} size="small" />
+            <Progress percent={modalValue?.moderateUnmet} size="small" />
           </div>
 
           <div className=" w-3/4 pb-3">
             <p className=" text-md">Well Unmet</p>
-            <Progress percent={70} size="small" />
+            <Progress percent={modalValue?.wellUnmet} size="small" />
           </div>
         </Modal>
       </div>

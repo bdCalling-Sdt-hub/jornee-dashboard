@@ -23,23 +23,23 @@ const UserManagement = () => {
     pageSize: 10,
   });
 
-  const {data , error, isLoading} = useAllUsersQuery({
+  const { data, error, isLoading } = useAllUsersQuery({
     page: pagination.current,
     limit: pagination.pageSize,
   })
   console.log(data)
 
-const formattedData = data?.data?.data?.map((user,i) =>(
-  // console.log(user)
-  {
-    key : i+1,
-    name : user?.role,
-    email : user?.email ? user?.email : user?.appId,
-    status : user?.isActive ? "Active" : "Deactivate",
-    joinDate : user?.createdAt
+  const formattedData = data?.data?.data?.map((user, i) => (
+    // console.log(user)
+    {
+      key: i + 1,
+      name: user?.role,
+      email: user?.email ? user?.email : user?.appId,
+      status: user?.isActive ? "Active" : "Deactivate",
+      joinDate: user?.createdAt
 
-  }
-))
+    }
+  ))
 
   const components = {
     header: {
@@ -60,6 +60,7 @@ const formattedData = data?.data?.data?.map((user,i) =>(
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = (value) => {
+    console.log(value)
     setModalData(value);
     setIsModalOpen(true);
   };
@@ -123,7 +124,7 @@ const formattedData = data?.data?.data?.map((user,i) =>(
 
         <div className="custom-pagination">
           <Table
-          components={components}
+            components={components}
             columns={UserColumns}
             dataSource={formattedData}
             className="text-center"
@@ -133,7 +134,7 @@ const formattedData = data?.data?.data?.map((user,i) =>(
               current: pagination.current,
               pageSize: pagination.pageSize,
               onChange: handlePageChange,
-              total : data?.data?.meta?.total || 0,
+              total: data?.data?.meta?.total || 0,
             }}
           />
         </div>
