@@ -4,15 +4,15 @@ import { Button, Modal, Table } from "antd";
 import { IoEyeOutline } from "react-icons/io5";
 import { useAllUsersQuery } from "../../redux/api/dashboardApi";
 
-const UserData = [
-  {
-    key: "1",
-    name: "Tushar",
-    email: "tushar@gmail.com",
-    status: "active",
-    joinDate: "15 july 2024",
-  }
-];
+// const UserData = [
+//   {
+//     key: "1",
+//     name: "Tushar",
+//     email: "tushar@gmail.com",
+//     status: "active",
+//     joinDate: "15 july 2024",
+//   }
+// ];
 
 
 
@@ -30,7 +30,6 @@ const UserManagement = () => {
   console.log(data)
 
   const formattedData = data?.data?.data?.map((user, i) => (
-    // console.log(user)
     {
       key: i + 1,
       name: user?.role,
@@ -60,7 +59,6 @@ const UserManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = (value) => {
-    console.log(value)
     setModalData(value);
     setIsModalOpen(true);
   };

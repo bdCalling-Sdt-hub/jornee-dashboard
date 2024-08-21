@@ -2,36 +2,9 @@ import { Modal, Progress, Table } from "antd";
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import {  useReportTestNameQuery } from "../../redux/api/dashboardApi";
-const data = [
-  {
-    key: "1",
-    testName: "Connection",
-    percentage: 30,
-  },
-  {
-    key: "2",
-    testName: "Safety",
-    percentage: 50,
-  },
-  {
-    key: "3",
-    testName: "Appreciation",
-    percentage: 40,
-  },
-  {
-    key: "4",
-    testName: "Autonomy",
-    percentage: 70,
-  },
-  {
-    key: "5",
-    testName: "Impact",
-    percentage: 80,
-  },
-];
+
 const ReportTable = () => {
   const {data : reports, error, loading} = useReportTestNameQuery()
-console.log(reports)
   const tableData = reports?.data?.map((report, i)=>({
     key : i+1,
     testName : report?.name,
@@ -43,7 +16,6 @@ console.log(reports)
   }))
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalValue, setModalValue] = useState()
-  console.log(modalValue)
   const handleModal = (value)=>{
     setIsModalOpen(true)
     setModalValue(value)

@@ -4,16 +4,24 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const UserReportModal = ({ isModalOpen, setIsModalOpen,  selected_data }) => {
-  const colors = ['#EBAB04',"#e96e34","#873058"]
-  const emotions = selected_data?.emotions?.map((value, i) => (
-    {
-      name : value,
-      color : colors[i]
+const UserReportModal = ({ isModalOpen, setIsModalOpen, selected_data }) => {
+  const colors = ['#EBAB04', "#e96e34", "#873058"]
 
-    }
-  ))
- console.log(selected_data)
+  const emotions = selected_data?.feelingsData?.flatMap(emotion =>
+    emotion?.emotions?.map((value, i) => ({
+      name: value,
+      color: colors[i],
+    }))
+  );
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
     <div>
       <Modal
@@ -21,81 +29,80 @@ const UserReportModal = ({ isModalOpen, setIsModalOpen,  selected_data }) => {
         onCancel={() => setIsModalOpen(false)}
         footer={false}
       >
-        {/* <Slider {...settings}> */}
-         
-          <div className=" px-3 py-4">
-            <h3 className=" text-lg font-medium pb-2 ">Emotions</h3>
-            <div className=" flex items-center gap-3 ">
-              {
-                emotions?.map((emotion,i )=> <p key={i} style={{backgroundColor : emotion?.color}} className={ ` flex px-4 py-2  rounded-lg items-center gap-1 `}>
-                {" "}
-                <span className=" text-white text-sm font-medium"> {emotion?.name}</span>
-              </p>
-)
-              }
-             
-              {/* <p className=" bg-[#e96e34] flex px-4 py-2  rounded-lg items-center  gap-1">
-                {" "}
-                <span> 😀 </span>{" "}
-                <span className=" text-white text-sm font-medium"> trust</span>
-              </p>
 
-              <p className=" bg-[#873058] flex px-4 py-2  rounded-lg items-center gap-1 ">
-                {" "}
-                <span>😀 </span>{" "}
-                <span className=" text-white text-sm font-medium">
+        {
+          selected_data?.feelingsData?.length === 1 && <div className=" px-3 py-4">
+            <h3 className=" text-lg font-medium pb-2 ">Emotions</h3>
+
+            <div className=" flex items-center gap-3 ">
+
+              {
+                emotions?.map((emotion, i) => <p key={i} style={{ backgroundColor: emotion?.color }} className={` flex px-4 py-2  rounded-lg items-center gap-1 `}>
                   {" "}
-                  anticipation
-                </span>
-              </p> */}
+                  <span className=" text-white text-sm font-medium"> {emotion?.name}</span>
+                </p>
+                )
+              }
             </div>
 
             <h3 className=" text-lg font-medium pt-5 ">Feelings</h3>
             <p className="text-[#666666] py-1">
-              {selected_data?.feelings}
-              </p>
+              {selected_data?.feelingsData[0]?.feelings}
+            </p>
 
             <h3 className=" text-lg font-medium pt-5 ">Needs</h3>
             <p className="text-[#666666] py-1">
-            {selected_data?.needs}
+              {selected_data?.feelingsData[0]?.needs}
             </p>
           </div>
+        }
+        {
+          selected_data?.feelingsData?.length > 1 &&
 
-          {/* <div className=" px-3 py-4">
-            <h3 className=" text-lg font-medium pb-2 ">Emotions 2</h3>
-            <div className=" flex items-center gap-3 ">
-              <p className=" bg-[#EBAB04] flex px-4 py-2  rounded-lg items-center gap-1 ">
-                {" "}
-                <span>😀 </span>{" "}
-                <span className=" text-white text-sm font-medium"> Joy</span>
-              </p>
+          <Slider {...settings}>
 
-              <p className=" bg-[#e96e34] flex px-4 py-2  rounded-lg items-center  gap-1">
-                {" "}
-                <span> 😀 </span>{" "}
-                <span className=" text-white text-sm font-medium"> trust</span>
-              </p>
+            
+            {
+              selected_data?.feelingsData?.map((feeling, i) =>
+                <div key={i} className=" px-3 py-4">
+                  <h3 className=" text-lg font-medium pb-2 ">Emotions </h3>
+                  <div className=" flex items-center gap-3 ">
 
-              <p className=" bg-[#873058] flex px-4 py-2  rounded-lg items-center gap-1 ">
-                {" "}
-                <span>😀 </span>{" "}
-                <span className=" text-white text-sm font-medium">
-                  {" "}
-                  anticipation
-                </span>
-              </p>
-            </div>
+                    {
+                      feeling?.emotions?.map((emotion ,i)=> <p key={i} style={{ backgroundColor: colors[i] }} className={`  flex px-4 py-2  rounded-lg items-center gap-1 `}>
+                      {" "}
+                      <span>😀 </span>{" "}
+                      <span className=" text-white text-sm font-medium">
+                        {" "}
+                        {emotion}
+                      </span>
+                    </p>)
+                    }
 
-            <h3 className=" text-lg font-medium pt-5 ">Feelings</h3>
-            <p className="text-[#666666] py-1">Frustrated & Confused</p>
+                    <p className=" bg-[#873058] flex px-4 py-2  rounded-lg items-center gap-1 ">
+                      {" "}
+                      <span>😀 </span>{" "}
+                      <span className=" text-white text-sm font-medium">
+                        {" "}
+                        anticipation
+                      </span>
+                    </p>
+                  </div>
 
-            <h3 className=" text-lg font-medium pt-5 ">Needs</h3>
-            <p className="text-[#666666] py-1">
-              I need to tell my boss that I need more time to complete the
-              project.
-            </p>
-          </div> */}
-        {/* </Slider> */}
+                  <h3 className=" text-lg font-medium pt-5 ">Feelings</h3>
+                  <p className="text-[#666666] py-1">{feeling?.feelings}</p>
+
+                  <h3 className=" text-lg font-medium pt-5 ">Needs</h3>
+                  <p className="text-[#666666] py-1">
+                   {feeling?.needs}
+                  </p>
+                </div>
+              )
+            }
+
+
+          </Slider>
+        }
       </Modal>
     </div>
   );
