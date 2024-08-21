@@ -12,6 +12,7 @@ const EmotionTable = () => {
     percentage : item?.percentage,
     color : colorCodes[i]
   }))
+
   const columns = [
     {
       title: "S.No",

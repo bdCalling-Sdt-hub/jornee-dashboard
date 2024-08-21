@@ -102,7 +102,7 @@ const SubscriptMangement = () => {
     <div className="mt-5">
 
 
-      <div>
+      {/* <div>
         <h1
           style={{
             fontSize: "20px",
@@ -121,9 +121,9 @@ const SubscriptMangement = () => {
           pagination={false}
 
         />
-      </div>
+      </div> */}
 
-      <div className=" mt-[100px]">
+      <div className="">
         <div className="flex items-center justify-between py-3">
           <h1
             style={{

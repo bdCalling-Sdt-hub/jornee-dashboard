@@ -10,7 +10,7 @@ const UserReport = () => {
   const { data: allUserReport, error, isLoading } = useAllUserReportQuery()
   // const {data  : reportEmotionData,error,isLoading} = useReportEmotionsQuery()
 
-
+  console.log(allUserReport)
   // console.log(allUserReport?.data?.result)
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
