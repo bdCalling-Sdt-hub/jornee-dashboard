@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from "react";
 import BackButton from "./BackButton";
-import { Button, Modal, Table } from "antd";
+import { Button, Dropdown, Modal, Table } from "antd";
 import { IoEyeOutline } from "react-icons/io5";
 import { useAllUsersQuery } from "../../redux/api/dashboardApi";
-
-// const UserData = [
-//   {
-//     key: "1",
-//     name: "Tushar",
-//     email: "tushar@gmail.com",
-//     status: "active",
-//     joinDate: "15 july 2024",
-//   }
-// ];
+import { FiFilter } from "react-icons/fi";
 
 
 
@@ -23,19 +14,25 @@ const UserManagement = () => {
     pageSize: 10,
   });
 
+  const [plan, setPlan] = useState('')
+
+  // Fetch data from api
   const { data, error, isLoading } = useAllUsersQuery({
     page: pagination.current,
     limit: pagination.pageSize,
+    subscription : plan
   })
-  console.log(data)
 
-  const formattedData = data?.data?.data?.map((user, i) => (
+  // Formatted data for show into the table 
+  const formattedData = data?.data?.map((user, i) => (
+
     {
       key: i + 1,
       name: user?.role,
       email: user?.email ? user?.email : user?.appId,
       status: user?.isActive ? "Active" : "Deactivate",
-      joinDate: user?.createdAt
+      joinDate: user?.createdAt,
+      subscription: user?.SubscriptionStatus === 'premium' ? <span className="text-[#4EAAFF]">{user?.SubscriptionStatus}</span> : <span className="text-[#FFBB0E]">{user?.SubscriptionStatus}</span>
 
     }
   ))
@@ -51,10 +48,6 @@ const UserManagement = () => {
   };
 
 
-  const [page, setPage] = useState(
-    new URLSearchParams(window.location.search).get("page") || 1
-  );
-
   const [modalData, setModalData] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -68,17 +61,23 @@ const UserManagement = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  //  user column
+  //  User table column
   const UserColumns = [
     {
       title: "User ID",
       dataIndex: "key",
       key: "key",
     },
+
     {
       title: "User Name",
       dataIndex: "name",
       key: "username",
+    },
+    {
+      title: "Subscription Status",
+      dataIndex: "subscription",
+      key: "subscription",
     },
     {
       title: "User Email",
@@ -91,14 +90,34 @@ const UserManagement = () => {
       dataIndex: "printView",
       key: "printView",
       render: (_, record) => (
-        <IoEyeOutline size={20} className="" onClick={() => showModal(record)} />
+        <IoEyeOutline size={20} className="cursor-pointer" onClick={() => showModal(record)} />
       ),
     },
   ];
 
-  const handlePageChange = (page) => {
-    setPagination((prev) => ({ ...prev, current: page }));
-  };
+// Filter data options
+  const items = [
+    {
+      key: '1',
+      label: (
+
+        <p onClick={() => setPlan('')} >All</p>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <p onClick={() => setPlan('premium')} className="text-[#4EAAFF]">Premium</p>
+      ),
+    },
+    {
+      key: '3',
+      label: (
+        <p className="text-[#FFBB0E]" onClick={() => setPlan('free')}>Free</p>
+
+      ),
+    },
+  ];
 
   return (
     <div className="bg-[#F1F2F6] mt-5">
@@ -109,16 +128,29 @@ const UserManagement = () => {
           borderRadius: "12px",
         }}
       >
-        <h1
-          style={{
-            fontSize: "20px",
-            fontWeight: 600,
-            color: "#2F2F2F",
-            padding: "10px",
-          }}
-        >
-          User List
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1
+            style={{
+              fontSize: "20px",
+              fontWeight: 600,
+              color: "#2F2F2F",
+              padding: "10px",
+            }}
+          >
+            User List
+          </h1>
+
+          <div className="flex gap-2 items-center mr-4">
+
+
+            <Dropdown menu={{ items }} borderRadius placement="bottomRight">
+              <Button className="border-none">
+                <FiFilter className="cursor-pointer" size={25} />
+              </Button>
+            </Dropdown>
+            <p className="font-semibold">Filter</p>
+          </div>
+        </div>
 
         <div className="custom-pagination">
           <Table
@@ -127,12 +159,11 @@ const UserManagement = () => {
             dataSource={formattedData}
             className="text-center"
             pagination={{
-              // pageSize: 10,
-              // defaultCurrent: parseInt(page),
               current: pagination.current,
               pageSize: pagination.pageSize,
-              onChange: handlePageChange,
-              total: data?.data?.meta?.total || 0,
+              onChange: (page) => setPagination({ ...pagination, current: page }),
+              total: data?.data?.meta?.total,
+              showSizeChanger: false,
             }}
           />
         </div>

@@ -19,11 +19,13 @@ const dashboardApi = baseApi.injectEndpoints({
             providesTags: ['earningAnalytics']
         }),
         allUsers: builder.query({
-            query: ({ page = 1, limit = 10 }) => ({
-                url: `dashboard/all-users?page=${page}&limit=${limit}`,
+            query: ({ page, limit, subscription }) => ({
+                url: `dashboard/all-subs-users?page=${page}&limit=${limit}&subscriptionStatus=${subscription ? `${subscription}` : ""}`,
                 method: "GET"
             }),
             providesTags: ['allUsers']
+            // ${subscription ? `&subscription=${subscription}` : `&subscription=''`}
+            // dashboard/all-users?page=${page}&limit=${limit}
         }),
         subscriptionPlan: builder.query({
             query: () => ({
