@@ -7,6 +7,7 @@ import PromptsModal from "../../Components/PromptsModal";
 import { useParams } from "react-router-dom";
 import { useDeleteTestQuestionMutation, useTestQuestionQuery } from "../../redux/api/dashboardApi";
 import Swal from "sweetalert2";
+import UpdateQuestionModal from "../../Components/UpdateQuestionModal/UpdateQuestionModal";
 
 const JournalingData = [
   {
@@ -36,12 +37,12 @@ const JournalingData = [
 
 const TestConnection = () => {
   const [openQuesModal, setOpenQuesModal] = useState(false);
+  const [openEditQuestionModal, setOpenEditQuestionModal] = useState(false)
   const [openPrompts, setOpenPrompts] = useState(false);
+  const [updateQuestionName, setUpdateQuestionName] = useState("")
   const id = useParams()
-  // console.log(id)
   const {data:getAllTestQuestion, isError, isLoading} =  useTestQuestionQuery(id?.id);
   const [deleteTestQuestion] = useDeleteTestQuestionMutation()
-
   const formattedQuestionData = getAllTestQuestion?.data?.map((question, i)=>({
     key : i+1,
     id  : question?._id,
@@ -65,10 +66,10 @@ const TestConnection = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <div className="mx-auto flex items-center ">
+        <div className=" flex items-center ">
           <CiEdit
             onClick={() => handleEditQuestion(record)}
-            className=""
+            className="cursor-pointer"
             size={20}
           />
           <RiDeleteBinLine className="mx-auto text-red-600 cursor-pointer" onClick={()=>handleDeleteQuestion(record)} size={20} />
@@ -102,8 +103,8 @@ const TestConnection = () => {
   ];
 
   const handleEditQuestion =(value)=>{
-    setOpenQuesModal(true)
-    console.log(value)
+    setOpenEditQuestionModal(true)
+    setUpdateQuestionName(value)
   }
 
 
@@ -222,6 +223,7 @@ const TestConnection = () => {
         openQuesModal={openQuesModal}
         setOpenQuesModal={setOpenQuesModal}
       />
+      <UpdateQuestionModal setOpenEditQuestionModal={setOpenEditQuestionModal} updateQuestionName={updateQuestionName} openEditQuestionModal={openEditQuestionModal} />
       <PromptsModal openPrompts={openPrompts} setOpenPrompts={setOpenPrompts} />
     </div>
   );
