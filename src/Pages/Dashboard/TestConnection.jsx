@@ -4,6 +4,8 @@ import { CiEdit } from "react-icons/ci";
 import { RiDeleteBinLine } from "react-icons/ri";
 import QuestionModal from "../../Components/QuestionModal";
 import PromptsModal from "../../Components/PromptsModal";
+import { useParams } from "react-router-dom";
+import { useTestQuestionQuery } from "../../redux/api/dashboardApi";
 const QuestionData = [
   {
     key: "1",
@@ -59,6 +61,17 @@ const JournalingData = [
 const TestConnection = () => {
   const [openQuesModal, setOpenQuesModal] = useState(false);
   const [openPrompts, setOpenPrompts] = useState(false);
+  const id = useParams()
+
+  const {data:getAllTestQuestion, isError, isLoading} =  useTestQuestionQuery(id?.id);
+  console.log(getAllTestQuestion?.data)
+
+  const formattedQuestionData = getAllTestQuestion?.data?.map((question, i)=>({
+    key : i+1,
+    id  : question?._id,
+    QuestionName : question?.item
+  }))
+
 
   const QuestionColumns = [
     {
@@ -152,7 +165,7 @@ const TestConnection = () => {
         </div>
         <Table
           columns={QuestionColumns}
-          dataSource={QuestionData}
+          dataSource={formattedQuestionData}
           pagination={false}
         />
       </div>

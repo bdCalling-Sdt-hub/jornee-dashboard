@@ -79,9 +79,34 @@ const dashboardApi = baseApi.injectEndpoints({
                 method : 'DELETE' 
             }),
             invalidatesTags : ['subscription']
-        })
+        }),
+        createFreeUser :  builder.mutation({
+            query : (data)=>({
+                url : 'subscription-plan/create-plan-free-user',
+                method :"POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body : JSON.stringify(data)
+            }),
+            invalidatesTags : ['subscription']
+        }),
+        allTest : builder.query({
+            query : ()=>({
+                url : 'test/all',
+                method : "GET"
+            }),
+            providesTags: ['allTest']
+        }),
+        testQuestion: builder.query({
+            query: (id) => ({
+             url : `test/questions/${id}`,
+             method : "GET",
+            }),
+            providesTags : ['testQuestions']
+          }),
 
     })
 })
 
-export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation , useDeleteFreeUserMutation} = dashboardApi;
+export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation , useDeleteFreeUserMutation, useCreateFreeUserMutation , useAllTestQuery , useTestQuestionQuery} = dashboardApi;

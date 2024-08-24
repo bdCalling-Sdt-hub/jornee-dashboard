@@ -42,7 +42,7 @@ function App() {
                 element={<SubscriptionManageMent />}
               />
               <Route path="/test" element={<Test />} />
-              <Route path="/test-connection" element={<TestConnection />} />
+              <Route path="/test-connection/:id" element={<TestConnection />} />
               <Route path="/report" element={<Report />} />
               <Route path="/resources" element={<Resources />} />
               <Route path="/notifications" element={<Notifications />} />
