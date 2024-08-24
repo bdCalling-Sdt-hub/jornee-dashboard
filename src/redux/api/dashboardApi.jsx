@@ -66,47 +66,58 @@ const dashboardApi = baseApi.injectEndpoints({
             }),
             providesTags: ["report"]
         }),
-        subscriptionFreePlan : builder.query({
-            query : ()=>({
-                url : 'subscription-plan/all-fre-plans',
-                method : "GET"
+        subscriptionFreePlan: builder.query({
+            query: () => ({
+                url: 'subscription-plan/all-fre-plans',
+                method: "GET"
             }),
             providesTags: ['subscription']
         }),
-        deleteFreeUser : builder.mutation({
-            query : (id)=>({
-                url : `subscription-plan/delete-free-plans/${id}`,
-                method : 'DELETE' 
+        deleteFreeUser: builder.mutation({
+            query: (id) => ({
+                url: `subscription-plan/delete-free-plans/${id}`,
+                method: 'DELETE'
             }),
-            invalidatesTags : ['subscription']
+            invalidatesTags: ['subscription']
         }),
-        createFreeUser :  builder.mutation({
-            query : (data)=>({
-                url : 'subscription-plan/create-plan-free-user',
-                method :"POST",
+        createFreeUser: builder.mutation({
+            query: (data) => ({
+                url: 'subscription-plan/create-plan-free-user',
+                method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body : JSON.stringify(data)
+                body: JSON.stringify(data)
             }),
-            invalidatesTags : ['subscription']
+            invalidatesTags: ['subscription']
         }),
-        allTest : builder.query({
-            query : ()=>({
-                url : 'test/all',
-                method : "GET"
+        allTest: builder.query({
+            query: () => ({
+                url: 'test/all',
+                method: "GET"
             }),
             providesTags: ['allTest']
         }),
         testQuestion: builder.query({
             query: (id) => ({
-             url : `test/questions/${id}`,
-             method : "GET",
+                url: `test/questions/${id}`,
+                method: "GET",
             }),
-            providesTags : ['testQuestions']
-          }),
+            providesTags: ['testQuestions']
+        }),
+        createQuestion: builder.mutation({
+            query: (data) => ({
+                url: 'test//create-question',
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }),
+            invalidatesTags: ['testQuestions']
+        }),
 
     })
 })
 
-export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation , useDeleteFreeUserMutation, useCreateFreeUserMutation , useAllTestQuery , useTestQuestionQuery} = dashboardApi;
+export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation, useDeleteFreeUserMutation, useCreateFreeUserMutation, useAllTestQuery, useTestQuestionQuery, useCreateQuestionMutation } = dashboardApi;

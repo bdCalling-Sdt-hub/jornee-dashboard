@@ -6,16 +6,9 @@ const AddUserModal = ({ openModal, setOpenModal }) => {
 
   const [createFreeUser] = useCreateFreeUserMutation()
   const [errorMessage, setIsError] = useState()
-  // const onFinish =(value)=>{
-  //   const response = createFreeUser(value).unwrap()
-  //   console.log(response)
-  //   setOpenModal(false)
-  //   // console.log(value)
-  // }
-
+ 
 
   const onFinish =  (value) => {
-    console.log(value)
 
       createFreeUser(value).unwrap()
       .then((payload) =>  Swal.fire({

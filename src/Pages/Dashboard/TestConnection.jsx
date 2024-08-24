@@ -62,8 +62,9 @@ const TestConnection = () => {
   const [openQuesModal, setOpenQuesModal] = useState(false);
   const [openPrompts, setOpenPrompts] = useState(false);
   const id = useParams()
-
+  // console.log(id)
   const {data:getAllTestQuestion, isError, isLoading} =  useTestQuestionQuery(id?.id);
+
   console.log(getAllTestQuestion?.data)
 
   const formattedQuestionData = getAllTestQuestion?.data?.map((question, i)=>({
@@ -209,6 +210,7 @@ const TestConnection = () => {
       </div>
 
       <QuestionModal
+        id={id}
         openQuesModal={openQuesModal}
         setOpenQuesModal={setOpenQuesModal}
       />
