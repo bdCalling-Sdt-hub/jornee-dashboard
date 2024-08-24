@@ -5,32 +5,8 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import QuestionModal from "../../Components/QuestionModal";
 import PromptsModal from "../../Components/PromptsModal";
 import { useParams } from "react-router-dom";
-import { useTestQuestionQuery } from "../../redux/api/dashboardApi";
-const QuestionData = [
-  {
-    key: "1",
-    QuestionName: "feel supported and understood by those closest to me.",
-  },
-  {
-    key: "2",
-    QuestionName:
-      "I am comfortable being vulnerable and sharing my true self with the ones I trust.",
-  },
-  {
-    key: "3",
-    QuestionName:
-      "I experience a sense of belonging and acceptance in my community and social groups.",
-  },
-  {
-    key: "4",
-    QuestionName: "I feel respected in my social groups and relationships.",
-  },
-  {
-    key: "5",
-    QuestionName:
-      "I feel considered and included enough in social plans and activities.",
-  },
-];
+import { useDeleteTestQuestionMutation, useTestQuestionQuery } from "../../redux/api/dashboardApi";
+import Swal from "sweetalert2";
 
 const JournalingData = [
   {
@@ -64,8 +40,7 @@ const TestConnection = () => {
   const id = useParams()
   // console.log(id)
   const {data:getAllTestQuestion, isError, isLoading} =  useTestQuestionQuery(id?.id);
-
-  console.log(getAllTestQuestion?.data)
+  const [deleteTestQuestion] = useDeleteTestQuestionMutation()
 
   const formattedQuestionData = getAllTestQuestion?.data?.map((question, i)=>({
     key : i+1,
@@ -92,11 +67,11 @@ const TestConnection = () => {
       render: (_, record) => (
         <div className="mx-auto flex items-center ">
           <CiEdit
-            onClick={() => setOpenQuesModal(true)}
+            onClick={() => handleEditQuestion(record)}
             className=""
             size={20}
           />
-          <RiDeleteBinLine className="mx-auto text-red-600" size={20} />
+          <RiDeleteBinLine className="mx-auto text-red-600 cursor-pointer" onClick={()=>handleDeleteQuestion(record)} size={20} />
         </div>
       ),
     },
@@ -125,6 +100,39 @@ const TestConnection = () => {
       ),
     },
   ];
+
+  const handleEditQuestion =(value)=>{
+    setOpenQuesModal(true)
+    console.log(value)
+  }
+
+
+  // Delete test question function
+  const handleDeleteQuestion = (value)=>{
+    const id = value?.id
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#7D4C48",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        deleteTestQuestion(id)
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your user been deleted.",
+          icon: "success"
+        });
+      }
+    });
+
+
+
+  }
 
   return (
     <div>

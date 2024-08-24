@@ -115,9 +115,28 @@ const dashboardApi = baseApi.injectEndpoints({
                 body: JSON.stringify(data)
             }),
             invalidatesTags: ['testQuestions']
+        }), 
+        updateTestName: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `test/edit-test/${id}`,
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }),
+            invalidatesTags: ['allTest']
+        }),
+
+        deleteTestQuestion: builder.mutation({
+            query: (id) => ({
+                url: `test/delete-test-question/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['testQuestions']
         }),
 
     })
 })
 
-export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation, useDeleteFreeUserMutation, useCreateFreeUserMutation, useAllTestQuery, useTestQuestionQuery, useCreateQuestionMutation } = dashboardApi;
+export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation, useDeleteFreeUserMutation, useCreateFreeUserMutation, useAllTestQuery, useTestQuestionQuery, useCreateQuestionMutation, useUpdateTestNameMutation, useDeleteTestQuestionMutation } = dashboardApi;

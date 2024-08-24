@@ -5,13 +5,13 @@ import { CiEdit } from "react-icons/ci";
 import { FaEye } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { useAllTestQuery } from '../../redux/api/dashboardApi';
+import { useAllTestQuery, useUpdateTestNameMutation } from '../../redux/api/dashboardApi';
 
 const Test = () => {
   const [showModal, setShowModal] = useState(false)
   const [selectedRecord, setSelectedRecord] = useState(null);
   const { data: allTests, isError, isLoading } = useAllTestQuery();
-  // console.log(allTests?.data)
+  const [updateTestName] = useUpdateTestNameMutation()
   const [form] = Form.useForm();
   const formattedTestData = allTests?.data?.map((test, i) => ({
     key: i + 1,
@@ -22,19 +22,29 @@ const Test = () => {
   const handleEditTest = (value) => {
     setShowModal(true)
     form.setFieldsValue({
-      testName: value?.testName, // Set the form field values based on the selected record
+      testName: value?.testName,
     });
     setSelectedRecord(value)
-    // console.log(value)
+
+
   }
 
   const handleCancel = () => {
     setShowModal(false);
     form.resetFields();  
-    console.log('click')
     setSelectedRecord('');
   };
-  // console.log(selectedRecord)
+
+const handleEditTestName =(value) =>{
+  const data = {
+    name : value?.testName
+  }
+  const id = selectedRecord?.id
+  updateTestName({id , data})
+  setShowModal(false)
+  
+}
+
   const menu = (record) => (
     <Menu>
       <div className="bg-white z-30 w-[100px] px-3 py-2">
@@ -114,6 +124,8 @@ const Test = () => {
         <div className="mt-10">
           <Form
             name="normal_login"
+            onFinish={handleEditTestName}
+            form={form}
             initialValues={{
               testName: selectedRecord?.testName || '',
             }}

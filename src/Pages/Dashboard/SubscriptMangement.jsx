@@ -109,9 +109,7 @@ const SubscriptMangement = () => {
   ];
 
   const handleDeleteFreeUser = (value) => {
-    console.log(value)
     const id = value?.id;
-    console.log(id)
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
