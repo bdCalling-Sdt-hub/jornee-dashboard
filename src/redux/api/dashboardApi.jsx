@@ -24,8 +24,6 @@ const dashboardApi = baseApi.injectEndpoints({
                 method: "GET"
             }),
             providesTags: ['allUsers']
-            // ${subscription ? `&subscription=${subscription}` : `&subscription=''`}
-            // dashboard/all-users?page=${page}&limit=${limit}
         }),
         subscriptionPlan: builder.query({
             query: () => ({
