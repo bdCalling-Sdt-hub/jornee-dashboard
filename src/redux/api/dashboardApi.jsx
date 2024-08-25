@@ -168,9 +168,20 @@ const dashboardApi = baseApi.injectEndpoints({
                 body : JSON.stringify(data)
             }),
             invalidatesTags : ['promptQuestion']
+        }),
+        createJournalPrompt : builder.mutation({
+            query : (data) =>({
+                url : "test/create-prompt-question",
+                method : "POST",
+                headers : {
+                    "Content-type"  :"application/json"
+                },
+                body : JSON.stringify(data)
+            }),
+            invalidatesTags : ['promptQuestion']
         })
 
     })
 })
 
-export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation, useDeleteFreeUserMutation, useCreateFreeUserMutation, useAllTestQuery, useTestQuestionQuery, useCreateQuestionMutation, useUpdateTestNameMutation, useDeleteTestQuestionMutation, useUpdateTestQuestionMutation, useJournalPromptQuestionQuery , useUpdateJournalPromptMutation, useDeleteJournalQuestionMutation } = dashboardApi;
+export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation, useDeleteFreeUserMutation, useCreateFreeUserMutation, useAllTestQuery, useTestQuestionQuery, useCreateQuestionMutation, useUpdateTestNameMutation, useDeleteTestQuestionMutation, useUpdateTestQuestionMutation, useJournalPromptQuestionQuery , useUpdateJournalPromptMutation, useDeleteJournalQuestionMutation, useCreateJournalPromptMutation } = dashboardApi;

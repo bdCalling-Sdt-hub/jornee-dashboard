@@ -8,14 +8,17 @@ import { useParams } from "react-router-dom";
 import { useDeleteJournalQuestionMutation,  useDeleteTestQuestionMutation, useJournalPromptQuestionQuery, useTestQuestionQuery } from "../../redux/api/dashboardApi";
 import Swal from "sweetalert2";
 import UpdateQuestionModal from "../../Components/UpdateQuestionModal/UpdateQuestionModal";
+import JournalPromptModal from "../../Components/JournalPromptModal/JournalPromptModal";
 
 
 
 const TestConnection = () => {
   const [openQuesModal, setOpenQuesModal] = useState(false);
-  const [openEditQuestionModal, setOpenEditQuestionModal] = useState(false)
+  const [openEditQuestionModal, setOpenEditQuestionModal] = useState(false);
+  const [addJournalModal, setAddJournalModal] = useState(false)
   const [openPrompts, setOpenPrompts] = useState(false);
   const [updateQuestionName, setUpdateQuestionName] = useState("")
+  const [updatePromptQuestion,setUpdatePromptQuestion] = useState('')
   const id = useParams()
 
   const { data: getAllTestQuestion, isError, isLoading } = useTestQuestionQuery(id?.id);
@@ -91,7 +94,7 @@ const TestConnection = () => {
       key: "action",
       render: (_, record) => (
         <div className="mx-auto flex items-center ">
-          <CiEdit onClick={() => setOpenPrompts(true)} className="cursor-pointer" size={20} />
+          <CiEdit onClick={() => handleEditJournalPrompt(record)} className="cursor-pointer" size={20} />
           <RiDeleteBinLine className="mx-auto text-red-600 cursor-pointer" onClick={() => handleDeletePrompt(record)} size={20} />
         </div>
       ),
@@ -121,6 +124,12 @@ const TestConnection = () => {
       }
     });
 
+  }
+
+  /** Edit journal prompt question function */
+  const handleEditJournalPrompt = (value) =>{
+    setOpenPrompts(true)
+    setUpdatePromptQuestion(value)
   }
 
 
@@ -216,7 +225,7 @@ const TestConnection = () => {
             Journaling Prompts
           </h1>
           <Button
-            onClick={() => setOpenPrompts(true)}
+            onClick={() => setAddJournalModal(true)}
             type="primary"
             htmlType="submit"
             block
@@ -241,13 +250,10 @@ const TestConnection = () => {
         />
       </div>
 
-      <QuestionModal
-        id={id}
-        openQuesModal={openQuesModal}
-        setOpenQuesModal={setOpenQuesModal}
-      />
+      <QuestionModal id={id} openQuesModal={openQuesModal} setOpenQuesModal={setOpenQuesModal} />
       <UpdateQuestionModal setOpenEditQuestionModal={setOpenEditQuestionModal} updateQuestionName={updateQuestionName} openEditQuestionModal={openEditQuestionModal} />
-      <PromptsModal openPrompts={openPrompts} setOpenPrompts={setOpenPrompts} />
+      <JournalPromptModal addJournalModal={addJournalModal} setAddJournalModal={setAddJournalModal} id={id} />
+      <PromptsModal setUpdatePromptQuestion={setUpdatePromptQuestion} updatePromptQuestion={updatePromptQuestion}  openPrompts={openPrompts} setOpenPrompts={setOpenPrompts} />
     </div>
   );
 };
