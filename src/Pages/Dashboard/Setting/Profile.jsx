@@ -3,8 +3,12 @@ import BackButton from "../BackButton";
 import { Form, Input, Button } from "antd";
 import { MdEdit, MdOutlineAddPhotoAlternate } from "react-icons/md";
 import Swal from "sweetalert2";
+import { useGetUserInfoQuery } from "../../../redux/api/userApi";
 
 const Profile = () => {
+
+  const {data : userInfo , isError, isLoading} = useGetUserInfoQuery()
+  console.log(userInfo)
   const [image, setImage] = useState(
     "https://avatars.design/wp-content/uploads/2021/02/corporate-avatars-TN-1.jpg"
   );
@@ -37,7 +41,6 @@ const Profile = () => {
   return (
     <div className="h-[53vh]">
       <div className=" grid grid-cols-3 gap-5 py-10">
-        {/* image   */}
         <div
           style={{
             display: "flex",
@@ -68,7 +71,6 @@ const Profile = () => {
           >
             <div
               style={{
-                // background: "rgba(0, 0, 0, 0.4)",
                 width: "100%",
                 height: "100%",
                 borderRadius: "100%",
@@ -90,24 +92,7 @@ const Profile = () => {
             onFinish={handleSubmit}
           >
             <div className=" grid grid-cols-2 gap-x-16 w-full gap-y-4 pt-5">
-              <div style={{ marginBottom: "20px" }}>
-                <label style={{ display: "block", marginBottom: "5px" }}>
-                  Your Name
-                </label>
-                <Form.Item style={{ marginBottom: 0 }} name="name">
-                  <Input
-                    placeholder="Enter Your  Name"
-                    type="text"
-                    style={{
-                      border: "1px solid #E0E4EC",
-                      height: "52px",
-                      background: "white",
-                      borderRadius: "8px",
-                      outline: "none",
-                    }}
-                  />
-                </Form.Item>
-              </div>
+             
 
               <div style={{ marginBottom: "20px" }}>
                 <label
@@ -146,28 +131,7 @@ const Profile = () => {
                       borderRadius: "8px",
                       outline: "none",
                     }}
-                  />
-                </Form.Item>
-              </div>
-
-              <div style={{ marginBottom: "20px" }}>
-                <label
-                  style={{ display: "block", marginBottom: "5px" }}
-                  htmlFor=""
-                >
-                  Password
-                </label>
-                <Form.Item name="password" style={{ marginBottom: 0 }}>
-                  <Input.Password
-                    type="password"
-                    placeholder="Enter Your Password"
-                    style={{
-                      border: "1px solid #E0E4EC",
-                      height: "52px",
-                      background: "white",
-                      borderRadius: "8px",
-                      outline: "none",
-                    }}
+                    readOnly
                   />
                 </Form.Item>
               </div>

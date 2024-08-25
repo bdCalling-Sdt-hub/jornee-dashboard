@@ -179,9 +179,16 @@ const dashboardApi = baseApi.injectEndpoints({
                 body : JSON.stringify(data)
             }),
             invalidatesTags : ['promptQuestion']
+        }),
+        getNotificationByType : builder.query({
+            query  : (type)=>({
+                url  : `notification/get-all-notifications?type=${type}`,
+                method :'GET'
+            }),
+            providesTags : ["notification"]
         })
 
     })
 })
 
-export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation, useDeleteFreeUserMutation, useCreateFreeUserMutation, useAllTestQuery, useTestQuestionQuery, useCreateQuestionMutation, useUpdateTestNameMutation, useDeleteTestQuestionMutation, useUpdateTestQuestionMutation, useJournalPromptQuestionQuery , useUpdateJournalPromptMutation, useDeleteJournalQuestionMutation, useCreateJournalPromptMutation } = dashboardApi;
+export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation, useDeleteFreeUserMutation, useCreateFreeUserMutation, useAllTestQuery, useTestQuestionQuery, useCreateQuestionMutation, useUpdateTestNameMutation, useDeleteTestQuestionMutation, useUpdateTestQuestionMutation, useJournalPromptQuestionQuery , useUpdateJournalPromptMutation, useDeleteJournalQuestionMutation, useCreateJournalPromptMutation , useGetNotificationByTypeQuery} = dashboardApi;

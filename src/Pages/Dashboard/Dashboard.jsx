@@ -11,9 +11,14 @@ const { Header, Sider, Content } = Layout;
 import { PoweroffOutlined, SettingOutlined } from "@ant-design/icons";
 import { RiFileEditLine } from "react-icons/ri";
 import { GrResources } from "react-icons/gr";
+import { useGetUserInfoQuery } from "../../redux/api/userApi";
+import { FaRegUser } from "react-icons/fa6";
 
 const Dashboard = () => {
   const { pathname } = useLocation();
+  const {data : userInfo , isError, isLoading} = useGetUserInfoQuery()
+  const baseUrl  = 'http://192.168.10.239:5001/'
+  const imageUrl = `${baseUrl}${userInfo?.data?.profile_image}`
   const linkItems = [
     {
       title: "Dashboard",
@@ -247,18 +252,21 @@ const Dashboard = () => {
           <div></div>
           <Link to="/setting">
             <div className=" flex items-center  ">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLotvhr2isTRMEzzT30Cj0ly77jFThGXr0ng&usqp=CAU"
+              {
+                userInfo?.data?.profile_image ? <img
+                src={imageUrl}
                 style={{
                   width: "40px",
                   height: "40px",
                   borderRadius: "100%",
                 }}
                 alt=""
-              />
+              /> : <FaRegUser size={30} />
+              }
+              
               <div>
-                <p className="p-3 h-3 font-semibold"> DR. Jim ahhmed </p>
-                <p className="p-3"> Admin </p>
+                <p className="p-3 h-3 font-semibold"> {userInfo?.data?.name} </p>
+                <p className="p-3"> {userInfo?.data?.role} </p>
               </div>
             </div>
           </Link>
