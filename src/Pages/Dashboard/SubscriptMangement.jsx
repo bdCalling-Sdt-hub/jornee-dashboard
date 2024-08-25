@@ -167,7 +167,7 @@ const SubscriptMangement = () => {
               padding: "10px",
             }}
           >
-            Add Subscription Free Users
+            Add Subscription To Free Users
           </h1>
 
         </div>

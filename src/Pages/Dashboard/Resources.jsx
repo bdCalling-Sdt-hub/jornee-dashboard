@@ -15,7 +15,6 @@ const Resources = () => {
   const [uploadId, setUploadId] = useState('')
   const { data: resourceTest, isError, isLoading } = useResourceTestNameQuery()
   const [uploadPdf] = useUploadPdfMutation()
-  // console.log(resourceTest)
   const formattedData = resourceTest?.data?.map((item, i) => ({
     key: i + 1,
     id : item?._id,
@@ -29,7 +28,6 @@ const Resources = () => {
     setPdf(value?.pdf)
 
   }
-    // console.log(pdf)
 
 
   const menu =(record)=> (

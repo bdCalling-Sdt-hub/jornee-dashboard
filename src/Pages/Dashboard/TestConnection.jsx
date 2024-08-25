@@ -5,35 +5,11 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import QuestionModal from "../../Components/QuestionModal";
 import PromptsModal from "../../Components/PromptsModal";
 import { useParams } from "react-router-dom";
-import { useDeleteTestQuestionMutation, useTestQuestionQuery } from "../../redux/api/dashboardApi";
+import { useDeleteJournalQuestionMutation,  useDeleteTestQuestionMutation, useJournalPromptQuestionQuery, useTestQuestionQuery } from "../../redux/api/dashboardApi";
 import Swal from "sweetalert2";
 import UpdateQuestionModal from "../../Components/UpdateQuestionModal/UpdateQuestionModal";
 
-const JournalingData = [
-  {
-    key: "1",
-    PromptsName: "feel supported and understood by those closest to me.",
-  },
-  {
-    key: "2",
-    PromptsName:
-      "I am comfortable being vulnerable and sharing my true self with the ones I trust.",
-  },
-  {
-    key: "3",
-    PromptsName:
-      "I experience a sense of belonging and acceptance in my community and social groups.",
-  },
-  {
-    key: "4",
-    PromptsName: "I feel respected in my social groups and relationships.",
-  },
-  {
-    key: "5",
-    PromptsName:
-      "I feel considered and included enough in social plans and activities.",
-  },
-];
+
 
 const TestConnection = () => {
   const [openQuesModal, setOpenQuesModal] = useState(false);
@@ -41,15 +17,33 @@ const TestConnection = () => {
   const [openPrompts, setOpenPrompts] = useState(false);
   const [updateQuestionName, setUpdateQuestionName] = useState("")
   const id = useParams()
-  const {data:getAllTestQuestion, isError, isLoading} =  useTestQuestionQuery(id?.id);
+
+  const { data: getAllTestQuestion, isError, isLoading } = useTestQuestionQuery(id?.id);
+  const { data: journalPromptQuestion, promptError, promptLoading } = useJournalPromptQuestionQuery(id?.id);
   const [deleteTestQuestion] = useDeleteTestQuestionMutation()
-  const formattedQuestionData = getAllTestQuestion?.data?.map((question, i)=>({
-    key : i+1,
-    id  : question?._id,
-    QuestionName : question?.item
+  const [deletePromptQuestion] = useDeleteJournalQuestionMutation()
+
+  // ============== test question table formatted data ====================/
+  const formattedQuestionData = getAllTestQuestion?.data?.map((question, i) => ({
+    key: i + 1,
+    id: question?._id,
+    QuestionName: question?.item
   }))
 
 
+
+  /* journal prompt question formatted data */
+  const formattedJournalPrompt = journalPromptQuestion?.data?.data?.map((prompts, i) => (
+    {
+      key: i + 1,
+      id: prompts?._id,
+      PromptsName: prompts?.item
+
+    }
+  ))
+
+
+  /** question table column format */
   const QuestionColumns = [
     {
       title: "S.No",
@@ -72,12 +66,14 @@ const TestConnection = () => {
             className="cursor-pointer"
             size={20}
           />
-          <RiDeleteBinLine className="mx-auto text-red-600 cursor-pointer" onClick={()=>handleDeleteQuestion(record)} size={20} />
+          <RiDeleteBinLine className="mx-auto text-red-600 cursor-pointer" onClick={() => handleDeleteQuestion(record)} size={20} />
         </div>
       ),
     },
   ];
 
+
+  /* Journal prompt column format */
   const JournalingColumns = [
     {
       title: "S.No",
@@ -95,21 +91,48 @@ const TestConnection = () => {
       key: "action",
       render: (_, record) => (
         <div className="mx-auto flex items-center ">
-          <CiEdit onClick={() => setOpenPrompts(true)} className="" size={20} />
-          <RiDeleteBinLine className="mx-auto text-red-600" size={20} />
+          <CiEdit onClick={() => setOpenPrompts(true)} className="cursor-pointer" size={20} />
+          <RiDeleteBinLine className="mx-auto text-red-600 cursor-pointer" onClick={() => handleDeletePrompt(record)} size={20} />
         </div>
       ),
     },
   ];
 
-  const handleEditQuestion =(value)=>{
+  /** Delete prompt question functionality */
+  const handleDeletePrompt = (value) => {
+    const id = value?.id
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#7D4C48",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        deletePromptQuestion(id)
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your user been deleted.",
+          icon: "success"
+        });
+      }
+    });
+
+  }
+
+
+  /** edit question functionality */
+  const handleEditQuestion = (value) => {
     setOpenEditQuestionModal(true)
     setUpdateQuestionName(value)
   }
 
 
   // Delete test question function
-  const handleDeleteQuestion = (value)=>{
+  const handleDeleteQuestion = (value) => {
     const id = value?.id
     Swal.fire({
       title: "Are you sure?",
@@ -213,7 +236,7 @@ const TestConnection = () => {
         </div>
         <Table
           columns={JournalingColumns}
-          dataSource={JournalingData}
+          dataSource={formattedJournalPrompt}
           pagination={false}
         />
       </div>

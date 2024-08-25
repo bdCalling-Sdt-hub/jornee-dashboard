@@ -1,55 +1,44 @@
 import React, { useState } from "react";
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Modal, Upload, message } from "antd";
-import { useUploadPdfMutation } from "../../redux/api/resourceApi";
+import { Button, Form, Modal } from "antd";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { BiCloudUpload } from "react-icons/bi";
 
-const AddResourcesModal = ({ addModalOpen, setAddModalOpen, onUpload, uploadId }) => {
+const AddResourcesModal = ({ addModalOpen, setAddModalOpen, uploadId }) => {
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState([]);
-  const [uploadPdf] = useUploadPdfMutation()
+  const [fileList, setFileList] = useState(null);
+  const [fileName, setFileName] = useState("");
+
   // Handle form submission
-  const handleSubmit = (values) => {
-
+  const handleSubmit = () => {
     const formData = new FormData();
-
     formData.append("test", uploadId);
     formData.append("pdf", fileList);
+    
     axios.post('http://192.168.10.239:5001/resource/add', formData, {
       headers: {
-        'Content-Type': 'multipart/form-data', // Optional, can be omitted
+        'Content-Type': 'multipart/form-data', 
         'Authorization': `Bearer ${JSON.parse(localStorage.getItem('accessToken'))}`
       }
     })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-    // uploadPdf(formData).unwrap().then((res)=>console.log(res)).catch((err)=>console.log(err))
-    // onUpload(formData);
+    .then((res) => Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "PDF Upload successfully!",
+      showConfirmButton: false,
+      timer: 1500
+    }))
+    .catch((err) => console.log(err));
 
-    // setAddModalOpen(false);
-    // form.resetFields();
-    // setFileList([]);
+    setAddModalOpen(false);
+    form.resetFields();
+    setFileName(""); // Reset the file name after submission
   };
-
-  // const handleFileChange = ({ fileList }) => {
-  //   console.log(fileList)
-  //   // setFileList(fileList.map(file => file.originFileObj || file));
-  //   setFileList(fileList);
-  // };
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    console.log(selectedFile)
     setFileList(selectedFile);
-    // if (selectedFile) {
-    //   if (selectedFile.type !== 'application/pdf') {
-    //     setError('Please select a PDF file.');
-    //     setFile(null);
-    //   } else {
-    //     setError('');
-    //     setFile(selectedFile);
-    //   }
-    // }
+    setFileName(selectedFile.name); // Set the file name to display
   };
 
   return (
@@ -59,40 +48,30 @@ const AddResourcesModal = ({ addModalOpen, setAddModalOpen, onUpload, uploadId }
       footer={null}
     >
       <h1 className="text-medium text-lg py-3">Add PDF</h1>
-      <Form
-        form={form}
-        onFinish={handleSubmit}
-      >
+      <Form form={form} onFinish={handleSubmit}>
+        <div className="flex flex-col items-center">
+          
+          <div className="relative w-full">
+            <label
+              htmlFor="pdfFile"
+              className="flex items-center justify-center w-full h-10 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+             
+              <BiCloudUpload size={25} />
 
-        {/* <Form.Item
-          name="upload"
-          valuePropName="fileList"
-          getValueFromEvent={({ fileList }) => fileList}
-          rules={[{ required: true, message: "Please upload a PDF file!" }]}
-        > */}
-        {/* <Upload
-            beforeUpload={(file) => {
-              // Restrict file type to PDF
-              if (file.type !== 'application/pdf') {
-                message.error('You can only upload PDF files!');
-                return Upload.LIST_IGNORE;
-              }
-              return false; // Prevent automatic upload
-            }}
-            onChange={handleFileChange}
-            fileList={fileList.map(file => ({ ...file, name: file.name }))}
-            maxCount={1}
-          >
-            <Button icon={<UploadOutlined />}>Click to upload</Button>
-          </Upload> */}
-        <input
-          type="file"
-          id="pdfFile"
-          onChange={handleFileChange}
-          required
-        />
-        {/* </Form.Item> */}
-
+              <span className="text-gray-500 ml-2">
+                {fileName ? fileName : "Click to Upload"}
+              </span>
+            </label>
+            <input
+              type="file"
+              id="pdfFile"
+              onChange={handleFileChange}
+              className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+              required
+            />
+          </div>
+        </div>
         <Form.Item className="mt-5 text-center">
           <Button
             type="primary"

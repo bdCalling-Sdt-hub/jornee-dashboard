@@ -143,9 +143,34 @@ const dashboardApi = baseApi.injectEndpoints({
                 body: JSON.stringify(data)
               })  ,
               invalidatesTags :['testQuestions']
+        }),
+        journalPromptQuestion: builder.query({
+            query: (id) => ({
+                url: `test/prompt-question/${id}`,
+                method: "GET",
+            }),
+            providesTags: ['promptQuestion']
+        }),
+        deleteJournalQuestion :  builder.mutation({
+            query :  (id)=>({
+                url : `test/delete-prompt-question/${id}`,
+                method : "DELETE"
+            }),
+            invalidatesTags  :['promptQuestion']
+        }),
+        updateJournalPrompt : builder.mutation({
+            query : ({id, data})=>({
+                url : `test/edit-prompt-question/${id}`,
+                method : 'PATCH',
+                headers : {
+                    'Content-Type' : "application/json"
+                },
+                body : JSON.stringify(data)
+            }),
+            invalidatesTags : ['promptQuestion']
         })
 
     })
 })
 
-export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation, useDeleteFreeUserMutation, useCreateFreeUserMutation, useAllTestQuery, useTestQuestionQuery, useCreateQuestionMutation, useUpdateTestNameMutation, useDeleteTestQuestionMutation, useUpdateTestQuestionMutation } = dashboardApi;
+export const { useOverViewQuery, useEarningAnalyticsQuery, useAllUsersQuery, useSubscriptionPlanQuery, useReportEmotionsQuery, useAllUserReportQuery, useReportTestNameQuery, useSubscriptionFreePlanQuery, useUpdateSubscriptionPlanMutation, useDeleteFreeUserMutation, useCreateFreeUserMutation, useAllTestQuery, useTestQuestionQuery, useCreateQuestionMutation, useUpdateTestNameMutation, useDeleteTestQuestionMutation, useUpdateTestQuestionMutation, useJournalPromptQuestionQuery , useUpdateJournalPromptMutation, useDeleteJournalQuestionMutation } = dashboardApi;

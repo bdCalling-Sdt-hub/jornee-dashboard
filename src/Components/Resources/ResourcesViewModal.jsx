@@ -23,7 +23,7 @@ const ResourcesViewModal = ({ viewModalOpen, setViewModalOpen, pdf }) => {
     <Modal
       open={viewModalOpen}
       onCancel={() => setViewModalOpen(false)}
-      footer={null}  // Setting footer to null to remove default footer
+      footer={null} 
     >
       <div className="my-4 mx-5">
         <div className="flex px-5 py-3 gap-4 border border-gray-400 rounded-lg m-5">
@@ -36,7 +36,7 @@ const ResourcesViewModal = ({ viewModalOpen, setViewModalOpen, pdf }) => {
                 <p className="font-medium pb-1">{filename}</p>
                 <p 
                   className="font-medium text-[#1DA1F2] cursor-pointer"
-                  onClick={handleDownload}  // Attach the click event handler
+                  onClick={handleDownload} 
                 >
                   Click to View
                 </p>
