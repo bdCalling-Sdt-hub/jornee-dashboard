@@ -1,33 +1,54 @@
-import { Modal } from "antd";
-import React from "react";
-import { IoDocumentAttachOutline } from "react-icons/io5";
-import { MdDeleteOutline } from "react-icons/md";
-const ResourcesViewModal = ({ viewModalOpen, setViewModalOpen }) => {
+import { Modal } from 'antd';
+import React from 'react';
+import { IoDocumentAttachOutline } from 'react-icons/io5';
+import { MdDeleteOutline } from 'react-icons/md';
+
+const ResourcesViewModal = ({ viewModalOpen, setViewModalOpen, pdf }) => {
+  const baseURL = 'http://192.168.10.239:5001/';
+  ;
+
+  // Extract the filename from the path
+  const pdfName = pdf?.split('/');
+  const filename = pdfName?.pop();  
+  const fullURL = `${baseURL}${pdf}`;
+  
+
+  // Handle download functionality
+  const handleDownload = () => {
+    window.open(fullURL, '_blank');
+   
+  };
+
   return (
-    <div>
-      <Modal
-        open={viewModalOpen}
-        onCancel={() => setViewModalOpen(false)}
-        footer={false}
-      >
-        <div className=" my-4 mx-5">
-          <div className=" flex  px-5 py-3 gap-4 border border-gray-400 rounded-lg m-5">
-            <p>
-              <IoDocumentAttachOutline size={20} />{" "}
-            </p>
+    <Modal
+      open={viewModalOpen}
+      onCancel={() => setViewModalOpen(false)}
+      footer={null}  // Setting footer to null to remove default footer
+    >
+      <div className="my-4 mx-5">
+        <div className="flex px-5 py-3 gap-4 border border-gray-400 rounded-lg m-5">
+          {filename ? (
             <div>
-              <p className=" font-medium pb-1">HannahBusing_Resume.pdf</p>
-              <p className=" text-[#989692] pb-1">200 KB</p>
-              <p className=" font-medium text-[#1DA1F2] "> Click to View </p>
+              <p>
+                <IoDocumentAttachOutline size={20} /> 
+              </p>
+              <div>
+                <p className="font-medium pb-1">{filename}</p>
+                <p 
+                  className="font-medium text-[#1DA1F2] cursor-pointer"
+                  onClick={handleDownload}  // Attach the click event handler
+                >
+                  Click to View
+                </p>
+              </div>
+              <p className="ms-6"></p>
             </div>
-            <p className=" ms-6">
-              {" "}
-              <MdDeleteOutline size={20} />{" "}
-            </p>
-          </div>
+          ) : (
+            "No File Available"
+          )}
         </div>
-      </Modal>
-    </div>
+      </div>
+    </Modal>
   );
 };
 

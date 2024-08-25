@@ -11,22 +11,33 @@ import { useResourceTestNameQuery, useUploadPdfMutation } from "../../redux/api/
 const Resources = () => {
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
+  const [pdf, setPdf] = useState('')
   const [uploadId, setUploadId] = useState('')
   const { data: resourceTest, isError, isLoading } = useResourceTestNameQuery()
   const [uploadPdf] = useUploadPdfMutation()
-
+  // console.log(resourceTest)
   const formattedData = resourceTest?.data?.map((item, i) => ({
     key: i + 1,
     id : item?._id,
+    pdf : item?.pdfUrl,
     testName: item?.name
   }))
+
+  const handleViewPdf = (value)=>{
+    
+    setViewModalOpen(true)
+    setPdf(value?.pdf)
+
+  }
+    // console.log(pdf)
+
 
   const menu =(record)=> (
     <Menu>
       <div className="bg-white z-30 w-[100px] px-3 py-2">
         <button
           className=" flex items-center gap-2 mb-1 "
-          onClick={() => setViewModalOpen(true)}
+          onClick={() => handleViewPdf(record)}
         >
           {" "}
           <span className="text-[#1D75F2]">
@@ -108,6 +119,7 @@ const Resources = () => {
       <Table columns={columns} dataSource={formattedData} pagination={false} />
       <ResourcesViewModal
         viewModalOpen={viewModalOpen}
+        pdf={pdf}
         setViewModalOpen={setViewModalOpen}
       />
       <AddResourcesModal
