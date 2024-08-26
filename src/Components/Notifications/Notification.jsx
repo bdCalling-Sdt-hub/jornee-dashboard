@@ -25,7 +25,7 @@ const Notification = () => {
         showConfirmButton: false,
         timer: 1500
       }));
-
+      form.resetFields()
 
   }
   const handleReflectionReminder = (value) => {
@@ -47,7 +47,6 @@ const Notification = () => {
         showConfirmButton: false,
         timer: 1500
       }));
-      form.resetFields()
 
   }
   const handleInspirational = (value) => {
@@ -100,7 +99,7 @@ const Notification = () => {
         </Form.Item>
       </Form>
 
-      <Form className="w-1/3 mb-4" onFinish={handleReflectionReminder}>
+      <Form  className="w-1/3 mb-4" onFinish={handleReflectionReminder}>
         <h1 className="text-lg font-semibold py-2">Reflections Reminders</h1>
         <Form.Item name="description">
           <Input.TextArea rows={4} placeholder="Write here something ...." />
@@ -127,7 +126,7 @@ const Notification = () => {
 
       <Form className="w-1/3 " onFinish={handleInspirational}>
         <h1 className="text-lg font-semibold py-2">Inspirational</h1>
-        <Form.Item name="reminder">
+        <Form.Item name="description">
           <Input.TextArea rows={4} placeholder="Write here something ...." />
         </Form.Item>
         <Form.Item className=" mt-5 text-end ">

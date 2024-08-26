@@ -4,6 +4,7 @@ import { Button, Dropdown, Modal, Table } from "antd";
 import { IoEyeOutline } from "react-icons/io5";
 import { useAllUsersQuery } from "../../redux/api/dashboardApi";
 import { FiFilter } from "react-icons/fi";
+import { getStatus } from "../../lib/getStatus";
 
 
 
@@ -30,7 +31,7 @@ const UserManagement = () => {
       key: i + 1,
       name: user?.role,
       email: user?.email ? user?.email : user?.appId,
-      status: user?.isActive ? "Active" : "Deactivate",
+      status: getStatus(user?.expirationTime),
       joinDate: user?.createdAt,
       subscription: user?.SubscriptionStatus === 'premium' ? <span className="text-[#4EAAFF]">{user?.SubscriptionStatus}</span> : <span className="text-[#FFBB0E]">{user?.SubscriptionStatus}</span>
 
@@ -50,6 +51,8 @@ const UserManagement = () => {
 
   const [modalData, setModalData] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  console.log(modalData)
 
   const showModal = (value) => {
     setModalData(value);
@@ -80,7 +83,7 @@ const UserManagement = () => {
       key: "subscription",
     },
     {
-      title: "User Email",
+      title: "User Email / App ID",
       dataIndex: "email",
       key: "email",
     },
@@ -194,10 +197,10 @@ const UserManagement = () => {
             <p className="font-semibold w-1/2"> Subscription Status</p>
             <p className="w-1/2"> {modalData?.status}</p>
           </div>
-          <div className=" flex  w-full   text-lg ">
+          {/* <div className=" flex  w-full   text-lg ">
             <p className="font-semibold w-1/2"> Join Date</p>
             <p className=" w-1/2"> {modalData?.joinDate?.split('T')[0]}</p>
-          </div>
+          </div> */}
         </div>
       </Modal>
     </div>

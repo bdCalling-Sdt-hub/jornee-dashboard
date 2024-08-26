@@ -38,7 +38,7 @@ function DashboardHome() {
     },
     {
       name: "Total Earning",
-      total: overView?.data?.todaysEarning,
+      total: overView?.data?.totalEarnings,
     
       icon: <RxCountdownTimer color="#FF9066" size={32} />,
       bgColor: "#FFDED2",

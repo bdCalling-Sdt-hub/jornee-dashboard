@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 // import BackButton from "../../Pages/Dashboard/BackButton";
 import { Button, Form, Input } from "antd";
+import { useChangePasswordMutation } from "../../../redux/api/userApi";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const ChangePassword = () => {
   const [newPassError, setNewPassError] = useState("");
   const [conPassError, setConPassError] = useState("");
   const [curPassError, setCurPassError] = useState("");
-
+  const [changePassword] = useChangePasswordMutation()
+  const navigate = useNavigate()
   const handleChangePassword = (values) => {
-    console.log(values);
     if (values?.current_password === values.new_password) {
       setNewPassError("The New password is semilar with old Password");
     } else {
@@ -20,10 +23,34 @@ const ChangePassword = () => {
     } else {
       setConPassError("");
     }
-  };
+    const password = {
+      oldPassword: values?.current_password,
+      newPassword: values?.new_password
+    }
 
-  const handleReset = () => {
-    window.location.reload();
+    changePassword({password}).unwrap()
+    .then((payload) =>  {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: payload?.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
+      .then(() => {
+        navigate('/');
+      });
+    }
+
+  )
+    .catch((error) =>Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "Something went wrong!",
+      showConfirmButton: false,
+      timer: 1500
+    }));
+
   };
 
   return (

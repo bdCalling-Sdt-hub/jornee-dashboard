@@ -245,7 +245,7 @@ const TestConnection = () => {
         </div>
         <Table
           columns={JournalingColumns}
-          dataSource={formattedJournalPrompt}
+          dataSource={formattedJournalPrompt?.reverse()}
           pagination={false}
         />
       </div>

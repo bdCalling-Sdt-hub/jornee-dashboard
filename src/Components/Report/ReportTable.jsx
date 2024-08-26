@@ -43,7 +43,7 @@ const ReportTable = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <FaEye onClick={() =>handleModal(record)} className=" " size={20} />
+        <div className="flex items-center justify-center "><FaEye onClick={() =>handleModal(record)} className=" " size={20} /></div>
       ),
     },
   ];

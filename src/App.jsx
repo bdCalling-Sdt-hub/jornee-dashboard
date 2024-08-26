@@ -12,7 +12,6 @@ import ChangePassword from "./Pages/Dashboard/Setting/ChangePassword";
 import Setting from "./Pages/Dashboard/Setting/Setting";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
 import UserManagement from "./Pages/Dashboard/UserManagement";
-// import TotalSellerList from "./Pages/Dashboard/TotalSellerList";
 import Profile from "./Pages/Dashboard/Setting/Profile";
 import Test from "./Pages/Dashboard/Test";
 import TestConnection from "./Pages/Dashboard/TestConnection";

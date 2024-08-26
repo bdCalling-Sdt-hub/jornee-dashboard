@@ -13,14 +13,15 @@ const userApi = baseApi.injectEndpoints({
             query : ()=>({
                 url : 'auth/admin/profile',
                 method :"GET"
-            })
+            }),
+            providesTags : ['user']
         }),
         updateUserInfo : builder.mutation({
             query : ({id, data})=>({
                 url : `auth/admin/edit-profile/${id}`,
                 method : 'PATCH',
                 headers : {
-                    'Content-Type' : "application/json"
+                    'Content-Type': 'multipart/form-data',
                 },
                 body : JSON.stringify(data)
             }),

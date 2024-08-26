@@ -10,10 +10,8 @@ const Login = () => {
   const [getUser, { data, isLoading, isSuccess, isError }] = useGetUserMutation();
   const navigate = useNavigate();
   const onFinish = async (values) => {
-    console.log(values)
     try {
       const response = await getUser({ email: values.email, password: values.password }).unwrap();
-      console.log(response?.data?.accessToken)
       if (response?.data?.accessToken) {
         // Store token in localStorage
         localStorage.setItem('accessToken', JSON.stringify(response?.data?.accessToken));
@@ -24,7 +22,6 @@ const Login = () => {
     } catch (error) {
       console.error('Login failed: ', error);
     }
-    // navigate("/");
   };
 
   return (

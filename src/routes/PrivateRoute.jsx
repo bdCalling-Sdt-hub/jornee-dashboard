@@ -1,18 +1,20 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { useGetUserInfoQuery } from "../redux/api/userApi";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
+  const { data: userInfo, isError, isLoading } = useGetUserInfoQuery();
 
-  const user = {
-    email: "tushar@gmail.com",
-  };
-
-  if (user.email) {
-    return children;
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  return <Navigate to="/login" state={{ from: location }} />;
+  if (isError || !userInfo?.data?.email) {
+    return <Navigate to="/login" state={{ from: location }} />;
+  }
+
+  return children;
 };
 
 export default PrivateRoute;
