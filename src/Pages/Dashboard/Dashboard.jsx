@@ -19,6 +19,7 @@ const Dashboard = () => {
   const {data : userInfo , isError, isLoading} = useGetUserInfoQuery()
   const baseUrl  = 'http://192.168.10.239:5001/'
   const imageUrl = `${baseUrl}${userInfo?.data?.profile_image}`
+  console.log(userInfo?.data?.profile_image)
   const linkItems = [
     {
       title: "Dashboard",

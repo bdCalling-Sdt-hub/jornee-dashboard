@@ -1,46 +1,91 @@
-import React, { useState } from "react";
-import BackButton from "../BackButton";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button } from "antd";
-import { MdEdit, MdOutlineAddPhotoAlternate } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
+import { useGetUserInfoQuery,useUpdateUserInfoMutation } from "../../../redux/api/userApi";
+import axios from "axios";
 import Swal from "sweetalert2";
-import { useGetUserInfoQuery } from "../../../redux/api/userApi";
-
 const Profile = () => {
-
-  const {data : userInfo , isError, isLoading} = useGetUserInfoQuery()
-  console.log(userInfo)
+  const [form] = Form.useForm(); // Create a form instance
+  const { data: userInfo, isError, isLoading } = useGetUserInfoQuery();
+  const [updateUser] = useUpdateUserInfoMutation()
   const [image, setImage] = useState(
     "https://avatars.design/wp-content/uploads/2021/02/corporate-avatars-TN-1.jpg"
   );
   const [imgURL, setImgURL] = useState(image);
+// console.log(userInfo?.data?.profile_image)
+  useEffect(() => {
+    if (userInfo?.data) {
+      form.setFieldsValue({
+        userName: userInfo?.data?.name,
+        email: userInfo?.data?.email
+      });
+      if (userInfo.data.profile_image) {
+        const baseUrl = 'http://192.168.10.239:5001/'
+        const imageUrl = `${baseUrl}${userInfo?.data?.profile_image}`
+        setImgURL(imageUrl);
+      }
+    }
+  }, [userInfo, form]);
+
   const handleSubmit = (values) => {
-    console.log(values);
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Updated Successfully",
-      showConfirmButton: false,
-      timer: 1500,
+    const id = userInfo?.data?._id;
+    const formData = new FormData();
+    
+    // Append form data
+    formData.append("name", values?.userName);
+    formData.append("profile_image", image);
+  
+    // // Debugging: log the form data content
+    // console.log('Form Data Content:');
+    // console.log('name:', formData.get('name'));
+  
+    // const file = formData.get('profile_image');
+    // if (file) {
+    //   console.log('profile_image file details:');
+    //   console.log('File Name:', file.name);
+    //   console.log('File Type:', file.type);
+    //   console.log('File Size:', file.size);
+    // }
+  
+    axios.patch(`http://192.168.10.239:5001/auth/admin/edit-profile/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('accessToken'))}`
+      }
+    })
+    .then((res) => {
+      console.log('Response:', res);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Profile updated successfully!",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    })
+    .catch((err) => {
+      console.error('Error:', err.response);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Error updating profile!",
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
   };
-  const handleReset = () => {
-    window.location.reload();
-  };
+  
+
   const onChange = (e) => {
-    const file = e.target.files[0];
+    const file = e?.target?.files[0];
     const imgUrl = URL.createObjectURL(file);
     setImgURL(imgUrl);
     setImage(file);
   };
-  const initialFormValues = {
-    name: "Daniel Navaes",
-    email: "danielnavaes@gmail.com",
-    mobile_number: "01756953936",
-  };
 
   return (
     <div className="h-[53vh]">
-      <div className=" grid grid-cols-3 gap-5 py-10">
+      <div className="grid grid-cols-3 gap-5 py-10">
         <div
           style={{
             display: "flex",
@@ -52,7 +97,6 @@ const Profile = () => {
           <input
             onChange={onChange}
             type="file"
-            name=""
             id="img"
             style={{ display: "none" }}
           />
@@ -74,30 +118,32 @@ const Profile = () => {
                 width: "100%",
                 height: "100%",
                 borderRadius: "100%",
-                position : "relative"
+                position: "relative",
               }}
             >
-              <MdEdit size={25} className="bg-[#7D4C48] rounded-full p-1 absolute bottom-10 right-0" color="white " />
+              <MdEdit
+                size={25}
+                className="bg-[#7D4C48] rounded-full p-1 absolute bottom-10 right-0"
+                color="white"
+              />
             </div>
           </label>
         </div>
 
-        {/* forms  */}
-        <div className="col-span-2  pe-20 ">
+        {/* forms */}
+        <div className="col-span-2 pe-20">
           <Form
-            name="normal_login"
+            form={form} // Bind the form instance
+            name="profile_form"
             className="login-form"
-            initialValues={initialFormValues}
             style={{ width: "100%", height: "fit-content" }}
             onFinish={handleSubmit}
           >
-            <div className=" grid grid-cols-2 gap-x-16 w-full gap-y-4 pt-5">
-             
-
+            <div className="grid grid-cols-2 gap-x-16 w-full gap-y-4 pt-5">
               <div style={{ marginBottom: "20px" }}>
                 <label
                   style={{ display: "block", marginBottom: "5px" }}
-                  htmlFor=""
+                  htmlFor="userName"
                 >
                   User Name
                 </label>

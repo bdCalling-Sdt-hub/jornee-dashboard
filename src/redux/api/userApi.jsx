@@ -16,15 +16,16 @@ const userApi = baseApi.injectEndpoints({
             })
         }),
         updateUserInfo : builder.mutation({
-            query : ({id,data})=>({
+            query : ({id, data})=>({
                 url : `auth/admin/edit-profile/${id}`,
-                method : "PATCH",
+                method : 'PATCH',
                 headers : {
-                    "Content-Type" : "application/json"
+                    'Content-Type' : "application/json"
                 },
                 body : JSON.stringify(data)
-            })
+            }),
+            invalidatesTags : ['user']
         })
     })
 })
-export const {useGetUserMutation, useGetUserInfoQuery , useUpdateUserInfoMutation} = userApi
+export const {useGetUserMutation, useGetUserInfoQuery , useUpdateUserInfoMutation } = userApi
