@@ -5,14 +5,13 @@ import { useGetUserInfoQuery,useUpdateUserInfoMutation } from "../../../redux/ap
 import axios from "axios";
 import Swal from "sweetalert2";
 const Profile = () => {
-  const [form] = Form.useForm(); // Create a form instance
+  const [form] = Form.useForm(); 
   const { data: userInfo, isError, isLoading } = useGetUserInfoQuery();
   const [updateUser] = useUpdateUserInfoMutation()
   const [image, setImage] = useState(
     "https://avatars.design/wp-content/uploads/2021/02/corporate-avatars-TN-1.jpg"
   );
   const [imgURL, setImgURL] = useState(image);
-// console.log(userInfo?.data?.profile_image)
   useEffect(() => {
     if (userInfo?.data) {
       form.setFieldsValue({
@@ -35,17 +34,6 @@ const Profile = () => {
     formData.append("name", values?.userName);
     formData.append("profile_image", image);
   
-    // // Debugging: log the form data content
-    // console.log('Form Data Content:');
-    // console.log('name:', formData.get('name'));
-  
-    // const file = formData.get('profile_image');
-    // if (file) {
-    //   console.log('profile_image file details:');
-    //   console.log('File Name:', file.name);
-    //   console.log('File Type:', file.type);
-    //   console.log('File Size:', file.size);
-    // }
   
     axios.patch(`http://192.168.10.239:5001/auth/admin/edit-profile/${id}`, formData, {
       headers: {

@@ -11,8 +11,8 @@ const dashboardApi = baseApi.injectEndpoints({
             providesTags: ['overview']
         }),
         earningAnalytics: builder.query({
-            query: () => ({
-                url: 'dashboard/earning-analytics',
+            query: (year) => ({
+                url: `dashboard/earning-analytics?year=${year}`,
                 method: "GET"
             }),
 

@@ -1,27 +1,20 @@
 import { Col, Row } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import "./DashboardHome.css";
-
 import DailyOverviewChart from "./DailyOverviewChart";
-import { HiUserGroup } from "react-icons/hi";
-import { FaUserGroup, FaUserPlus } from "react-icons/fa6";
+import { FaUserGroup } from "react-icons/fa6";
 import { LuBox } from "react-icons/lu";
-import { TbDatabaseDollar } from "react-icons/tb";
 import { RxCountdownTimer } from "react-icons/rx";
-import { Link } from "react-router-dom";
-import trendingImage from "../../../assets/trendingUp.png";
 import { CiBookmarkPlus } from "react-icons/ci";
 import { PiNotebookThin } from "react-icons/pi";
 import { useEarningAnalyticsQuery, useOverViewQuery } from "../../../redux/api/dashboardApi";
 function DashboardHome() {
 
   const {data : overView, error, isLoading} = useOverViewQuery();
-  const {data  : earning, error: earningError, isLoading :  earningLoading} = useEarningAnalyticsQuery()
-  console.log(earning)
-  const onChange = (pageNumber) => {
-    console.log("Page: ", pageNumber);
-  };
-
+  const [year, setYear] = useState('2024')
+  const {data  : earning, error: earningError, isLoading :  earningLoading} = useEarningAnalyticsQuery(year)
+ 
+  //** user overview data */
   const data = [
     {
       name: "Total User",
@@ -139,7 +132,7 @@ function DashboardHome() {
         }}
         className="w-full"
       >
-        <DailyOverviewChart earning={earning} />
+        <DailyOverviewChart year={year} setYear={setYear} earning={earning} />
       </div>
     </div>
   );

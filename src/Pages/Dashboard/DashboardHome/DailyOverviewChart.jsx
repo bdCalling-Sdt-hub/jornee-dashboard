@@ -2,14 +2,10 @@ import React, { useEffect, useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  Brush,
   AreaChart,
   Area,
   ResponsiveContainer,
@@ -17,100 +13,32 @@ import {
 
 
 
-export default function DailyRentChart({earning}) {
-  const [year, setYear] = useState("Jan");
+export default function DailyRentChart({earning , year, setYear}) {
 
-  console.log(earning?.data)
 
 
   const data2 = earning?.data?.map(ear => {
-    // console.log(ear)
     return ({
       name : ear?.month,
       pv : ear?.totalAmount
     })
   })
-  console.log(data2)
-  const data = [
-    {
-      name: "Jan",
-      pv: 0,
-    },
-    {
-      name: "Feb",
-      pv: 0,
-    },
-    {
-      name: "Mar",
-      pv: 9800,
-    },
-    {
-      name: "Apr",
-      pv: 3908,
-    },
-    {
-      name: "May",
-      pv: 9800,
-    },
-    {
-      name: "Jun",
-      pv: 5800,
-    },
-    {
-      name: "Jul",
-      pv: 8300,
-    },
-    {
-      name: "Aug",
-      pv: 4300,
-    },
-    {
-      name: "Sep",
-      pv: 8300,
-    },
-    {
-      name: "Oct",
-      pv: 4800,
-    },
-    {
-      name: "Nov",
-      pv: 6900,
-    },
-    {
-      name: "Dec",
-      pv: 4300,
-    },
-  ];
+  // console.log(data2)
  
   const items = [
     {
-      label: "Jan",
-      key: "Jan",
+      label: "2024",
+      key: "2024",
     },
     {
-      label: "Feb",
-      key: "Feb",
+      label: "2023",
+      key: "2023",
     },
     {
-      label: "Mar",
-      key: "Mar",
+      label: "2022",
+      key: "2022",
     },
-    {
-      label: "Apr",
-      key: "Apr",
-    },
-    {
-      label: "Apr",
-      key: "Apr",
-    },
-    {
-      label: "Apr",
-      key: "Apr",
-    },
-    {
-      label: "Apr",
-      key: "Apr",
-    },
+    
   ];
   const onClick = ({ key }) => {
     setYear(key);
