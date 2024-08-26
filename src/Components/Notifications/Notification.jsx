@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const Notification = () => {
   const [sendNotification] = useSendNotificationMutation()
-
+  const [form] = Form.useForm()
   const handleSendNotification = (value) => {
     const message = {
       type: "testReminder", ...value
@@ -18,7 +18,13 @@ const Notification = () => {
         showConfirmButton: false,
         timer: 1500
       }))
-      .catch((error) => console.error('rejected', error));
+      .catch((error) => Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: error?.data?.message,
+        showConfirmButton: false,
+        timer: 1500
+      }));
 
 
   }
@@ -34,8 +40,14 @@ const Notification = () => {
         showConfirmButton: false,
         timer: 1500
       }))
-      .catch((error) => console.error('rejected', error));
-
+      .catch((error) => Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: error?.data?.message,
+        showConfirmButton: false,
+        timer: 1500
+      }));
+      form.resetFields()
 
   }
   const handleInspirational = (value) => {
@@ -50,13 +62,19 @@ const Notification = () => {
         showConfirmButton: false,
         timer: 1500
       }))
-      .catch((error) => console.error('rejected', error));
+      .catch((error) =>Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: error?.data?.message,
+        showConfirmButton: false,
+        timer: 1500
+      }));
 
 
   }
   return (
     <div>
-      <Form className="w-1/3 mb-4" onFinish={handleSendNotification}>
+      <Form form={form} className="w-1/3 mb-4" onFinish={handleSendNotification}>
         <h1 className="text-lg font-semibold py-2">Test Reminders</h1>
         <Form.Item name="description">
           <Input.TextArea rows={4} placeholder="Write here something ...." />
