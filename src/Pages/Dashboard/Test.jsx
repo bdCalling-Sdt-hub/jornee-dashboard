@@ -18,7 +18,7 @@ const Test = () => {
     id: test?._id,
     testName: test?.name
   }))
-
+console.log(allTests)
   const handleEditTest = (value) => {
     setShowModal(true)
     form.setFieldsValue({

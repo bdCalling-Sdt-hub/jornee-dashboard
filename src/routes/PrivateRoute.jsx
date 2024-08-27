@@ -1,13 +1,14 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useGetUserInfoQuery } from "../redux/api/userApi";
+import { Skeleton } from "antd";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
   const { data: userInfo, isError, isLoading } = useGetUserInfoQuery();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="flex items-center justify-center"><Skeleton active /></div>;
   }
 
   if (isError || !userInfo?.data?.email) {

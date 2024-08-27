@@ -12,15 +12,13 @@ import { getStatus } from "../../lib/getStatus";
 const UserManagement = () => {
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 5,
   });
 
   const [plan, setPlan] = useState('')
 
   // Fetch data from api
   const { data, error, isLoading } = useAllUsersQuery({
-    page: pagination.current,
-    limit: pagination.pageSize,
     subscription : plan
   })
 
@@ -52,7 +50,6 @@ const UserManagement = () => {
   const [modalData, setModalData] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log(modalData)
 
   const showModal = (value) => {
     setModalData(value);
@@ -161,13 +158,6 @@ const UserManagement = () => {
             columns={UserColumns}
             dataSource={formattedData}
             className="text-center"
-            pagination={{
-              current: pagination.current,
-              pageSize: pagination.pageSize,
-              onChange: (page) => setPagination({ ...pagination, current: page }),
-              total: data?.data?.meta?.total,
-              showSizeChanger: false,
-            }}
           />
         </div>
       </div>

@@ -23,7 +23,7 @@ function DashboardHome() {
       bgColor: "#E4E4FF",
     },
     {
-      name: "Total Test Token",
+      name: "Total Test Taken",
       total: overView?.data?.totalTest,
       icon: <LuBox color="#FEC53D" size={32} />,
     
@@ -44,7 +44,7 @@ function DashboardHome() {
       bgColor: "#FFDED2",
     },
     {
-      name: "Test Token Today",
+      name: "Test Taken Today",
       total: overView?.data?.todaysTestCount,
       icon: <PiNotebookThin color="#5DD1D9" size={32} />,
      

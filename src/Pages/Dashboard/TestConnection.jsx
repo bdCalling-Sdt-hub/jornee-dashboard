@@ -5,7 +5,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import QuestionModal from "../../Components/QuestionModal";
 import PromptsModal from "../../Components/PromptsModal";
 import { useParams } from "react-router-dom";
-import { useDeleteJournalQuestionMutation,  useDeleteTestQuestionMutation, useJournalPromptQuestionQuery, useTestQuestionQuery } from "../../redux/api/dashboardApi";
+import { useAllTestQuery, useDeleteJournalQuestionMutation,  useDeleteTestQuestionMutation, useJournalPromptQuestionQuery, useTestQuestionQuery } from "../../redux/api/dashboardApi";
 import Swal from "sweetalert2";
 import UpdateQuestionModal from "../../Components/UpdateQuestionModal/UpdateQuestionModal";
 import JournalPromptModal from "../../Components/JournalPromptModal/JournalPromptModal";
@@ -20,21 +20,23 @@ const TestConnection = () => {
   const [updateQuestionName, setUpdateQuestionName] = useState("")
   const [updatePromptQuestion,setUpdatePromptQuestion] = useState('')
   const id = useParams()
-
   const { data: getAllTestQuestion, isError, isLoading } = useTestQuestionQuery(id?.id);
   const { data: journalPromptQuestion, promptError, promptLoading } = useJournalPromptQuestionQuery(id?.id);
+  const { data: allTests, error, loading } = useAllTestQuery();
   const [deleteTestQuestion] = useDeleteTestQuestionMutation()
   const [deletePromptQuestion] = useDeleteJournalQuestionMutation()
 
+  const testName = allTests?.data?.find(item => item?._id == id?.id)
+  // console.log(getAllTestQuestion)
   // ============== test question table formatted data ====================/
   const formattedQuestionData = getAllTestQuestion?.data?.map((question, i) => ({
     key: i + 1,
     id: question?._id,
     QuestionName: question?.item
   }))
-
-
-
+  // const reverseData = journalPromptQuestion?.data?.data
+  // console.log(reverseData)
+ 
   /* journal prompt question formatted data */
   const formattedJournalPrompt = journalPromptQuestion?.data?.data?.map((prompts, i) => (
     {
@@ -176,7 +178,7 @@ const TestConnection = () => {
     <div>
       <h1 className="text-3xl font-semibold text-[#7D4C48] text-center py-5">
         {" "}
-        Connection{" "}
+        {testName?.name}{" "}
       </h1>
 
       <div>
@@ -250,7 +252,7 @@ const TestConnection = () => {
         </div>
         <Table
           columns={JournalingColumns}
-          dataSource={formattedJournalPrompt?.reverse()}
+          dataSource={formattedJournalPrompt}
           pagination={false}
         />
       </div>
