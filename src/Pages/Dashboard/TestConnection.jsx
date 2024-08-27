@@ -26,6 +26,7 @@ const TestConnection = () => {
   const [deleteTestQuestion] = useDeleteTestQuestionMutation()
   const [deletePromptQuestion] = useDeleteJournalQuestionMutation()
 
+
   const testName = allTests?.data?.find(item => item?._id == id?.id)
   // console.log(getAllTestQuestion)
   // ============== test question table formatted data ====================/
@@ -34,8 +35,8 @@ const TestConnection = () => {
     id: question?._id,
     QuestionName: question?.item
   }))
-  // const reverseData = journalPromptQuestion?.data?.data
-  // console.log(reverseData)
+  // console.log(getAllTestQuestion)
+  
  
   /* journal prompt question formatted data */
   const formattedJournalPrompt = journalPromptQuestion?.data?.data?.map((prompts, i) => (
@@ -254,6 +255,9 @@ const TestConnection = () => {
           columns={JournalingColumns}
           dataSource={formattedJournalPrompt}
           pagination={false}
+          // pagination={{
+          //   pageSize : {pageSize}
+          // }}
         />
       </div>
 

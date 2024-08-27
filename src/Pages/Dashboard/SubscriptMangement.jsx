@@ -43,16 +43,17 @@ const SubscriptMangement = () => {
     price: plans?.packagePrice
 
   }))
-
+  console.log(freeSubscription?.data?.data)
   // Free subscription Plan user formatted data
   const freeUserTable = freeSubscription?.data?.data?.map((users, i) => (
     {
       id: users?._id,
       key: i + 1,
-      email: users?.user?.email ? users?.user?.email : users?.user?.appId
-
+      email: users?.user?.email ? users?.user?.email : users?.user?.appId,
+      create : users?.createdAt?.split('T')[0]
     }
   ))
+  console.log(freeUserTable)
 
 
   if (reFresh) {
@@ -78,6 +79,11 @@ const SubscriptMangement = () => {
       title: "Email or Id",
       dataIndex: "email",
       key: "email",
+    },
+    {
+      title: "Date",
+      dataIndex: "create",
+      key: "create",
     },
     {
       title: "Action",
