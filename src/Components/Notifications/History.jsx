@@ -7,13 +7,13 @@ import { useGetNotificationByTypeQuery } from "../../redux/api/dashboardApi";
 const History = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [type, setType] = useState('testReminder');
-  const [notificationMessage,setNotificationMessage] = useState('')
-  const { data :  notification, error, isLoading } = useGetNotificationByTypeQuery(type);
+  const [notificationMessage, setNotificationMessage] = useState('')
+  const { data: notification, error, isLoading } = useGetNotificationByTypeQuery(type);
 
 
-  const formattedNotification = notification?.data?.data?.map((note, i)=>({
-    key : i+1,
-    testName : note?.description
+  const formattedNotification = notification?.data?.data?.map((note, i) => ({
+    key: i + 1,
+    testName: note?.description
   }))
   const columns = [
     {
@@ -32,23 +32,23 @@ const History = () => {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <FaEye  onClick={() => handleShowNotification(record)} className="cursor-pointer " size={20} />
+        <div className="flex items-center justify-center"><FaEye onClick={() => handleShowNotification(record)} className="cursor-pointer " size={20} /></div>
       ),
     },
   ];
 
-  const handleShowNotification =(value)=>{
+  const handleShowNotification = (value) => {
     // console.log(value)
     setIsModalOpen(true)
     setNotificationMessage(value?.testName)
   }
 
   const onChange = (key) => {
-    if(key == 1){
+    if (key == 1) {
       setType('testReminder')
-    }if(key == 2){
+    } if (key == 2) {
       setType('reflectionReminder ')
-    }if(key == 3){
+    } if (key == 3) {
       setType('inspirational')
     }
 

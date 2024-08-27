@@ -4,7 +4,7 @@ import { useReportEmotionsQuery } from "../../redux/api/dashboardApi";
 
 const EmotionTable = () => {
 
-  const  colorCodes = ['#EBAB04', "#E0690E","#A4341B", "#7D933E"];
+  const  colorCodes = ['#EBAB04', "#E0690E","#A4341B", "#873058","#7D933E","#377FC0","#3145AE","#8137BB"];
   const {data  : reportEmotionData,error,isLoading} = useReportEmotionsQuery()
   const formattedData = reportEmotionData?.data?.map((item,i) => ({
     key : i+1, 

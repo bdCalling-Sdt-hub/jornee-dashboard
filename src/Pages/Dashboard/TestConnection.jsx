@@ -52,18 +52,20 @@ const TestConnection = () => {
       title: "S.No",
       dataIndex: "key",
       key: "key",
+      width  :150
     },
     {
       title: "Question Name",
       dataIndex: "QuestionName",
       key: "QuestionName",
+      align : 'left'
     },
     {
       title: "Action",
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <div className=" flex items-center ">
+        <div className=" flex items-center gap-5">
           <CiEdit
             onClick={() => handleEditQuestion(record)}
             className="cursor-pointer"
@@ -82,18 +84,21 @@ const TestConnection = () => {
       title: "S.No",
       dataIndex: "key",
       key: "key",
+      width : 150
     },
     {
       title: "Journaling Prompts name",
       dataIndex: "PromptsName",
       key: "PromptsName",
+      align : "left",
+      // className: "text-left"
     },
     {
       title: "Action",
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <div className="mx-auto flex items-center ">
+        <div className="mx-auto flex items-center gap-5">
           <CiEdit onClick={() => handleEditJournalPrompt(record)} className="cursor-pointer" size={20} />
           <RiDeleteBinLine className="mx-auto text-red-600 cursor-pointer" onClick={() => handleDeletePrompt(record)} size={20} />
         </div>
