@@ -1,18 +1,24 @@
-import { Table, Tabs } from "antd";
+import { Pagination, Table, Tabs } from "antd";
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa6";
 import HistoryModal from "./HistoryModal";
 import { useGetNotificationByTypeQuery } from "../../redux/api/dashboardApi";
+import { AlignCenterOutlined, AlignLeftOutlined } from "@ant-design/icons";
 
 const History = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [type, setType] = useState('testReminder');
   const [notificationMessage, setNotificationMessage] = useState('')
-  const { data: notification, error, isLoading } = useGetNotificationByTypeQuery(type);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10
+  const { data: notification, error, isLoading } = useGetNotificationByTypeQuery({page: currentPage});
+  
+  // console.log(notification?.data?.meta?.total)
 
 
   const formattedNotification = notification?.data?.data?.map((note, i) => ({
     key: i + 1,
+    title: note?.title,
     testName: note?.description
   }))
   const columns = [
@@ -22,9 +28,9 @@ const History = () => {
       key: "key",
     },
     {
-      title: "",
-      dataIndex: "testName",
-      key: "testName",
+      title: "Title",
+      dataIndex: "title",
+      key: "title",
     },
 
     {
@@ -38,10 +44,14 @@ const History = () => {
   ];
 
   const handleShowNotification = (value) => {
-    // console.log(value)
     setIsModalOpen(true)
-    setNotificationMessage(value?.testName)
+    setNotificationMessage(value)
   }
+
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+};
 
   const onChange = (key) => {
     if (key == 1) {
@@ -54,35 +64,43 @@ const History = () => {
 
 
   };
-  const items = [
-    {
-      key: "1",
-      label: "Test Reminders",
-      children: (
-        <Table columns={columns} dataSource={formattedNotification} pagination={false} />
-      ),
-    },
-    {
-      key: "2",
-      label: "Reflections Reminders",
-      children: (
-        <Table columns={columns} dataSource={formattedNotification} pagination={false} />
-      ),
-    },
-    {
-      key: "3",
-      label: "Inspirational",
-      children: (
-        <Table columns={columns} dataSource={formattedNotification} pagination={false} />
-      ),
-    },
-  ];
+  // const items = [
+  //   {
+  //     key: "1",
+  //     children: (
+  //       <Table columns={columns} dataSource={formattedNotification}  />
+  //     ),
+
+  //   },
+  // {
+  //   key: "2",
+  //   label: "Reflections Reminders",
+  //   children: (
+  //     <Table columns={columns} dataSource={formattedNotification} pagination={false} />
+  //   ),
+  // },
+  // {
+  //   key: "3",
+  //   label: "Inspirational",
+  //   children: (
+  //     <Table columns={columns} dataSource={formattedNotification} pagination={false} />
+  //   ),
+  // },
+  // ];
 
 
 
   return (
     <div>
-      <Tabs centered defaultActiveKey="1" items={items} onChange={onChange} />
+      {/* <Tabs centered defaultActiveKey="1" items={items} onChange={onChange} /> */}
+      <Table columns={columns} dataSource={formattedNotification} pagination={false} />
+      <div className="mt-5 flex items-center justify-center ">
+        <Pagination current={currentPage}
+          pageSize={pageSize}
+          showSizeChanger={false}
+          total={notification?.data?.meta?.total}
+          onChange={handlePageChange} />
+      </div>
       <HistoryModal notificationMessage={notificationMessage} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </div>
   );

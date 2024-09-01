@@ -111,3 +111,7 @@
 .slick-prev:before, .slick-next:before {
   font-size: 28px  !important
 }
+
+:where(.css-dev-only-do-not-override-djtmh8).ant-pagination [class^="ant-pagination"], :where(.css-dev-only-do-not-override-djtmh8).ant-pagination [class*=" ant-pagination"] {
+  /* display:  none; */
+}

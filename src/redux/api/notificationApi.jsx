@@ -12,11 +12,22 @@ const notificationApi = baseApi.injectEndpoints({
                 body: JSON.stringify(data)
             }),
             invalidatesTags: ['notification']
+        }),
+        sendNotificationNew: builder.mutation({
+            query: (data) => ({
+                url: 'notification/send',
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }),
+            invalidatesTags: ['notification']
         })
     })
 })
 
 
-export const {useSendNotificationMutation} = notificationApi
+export const { useSendNotificationMutation, useSendNotificationNewMutation } = notificationApi
 
 

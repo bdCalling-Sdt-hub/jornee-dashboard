@@ -181,8 +181,12 @@ const dashboardApi = baseApi.injectEndpoints({
             invalidatesTags : ['promptQuestion']
         }),
         getNotificationByType : builder.query({
-            query  : (type)=>({
-                url  : `notification/get-all-notifications?type=${type}`,
+            query  : ({page})=>({
+                url  : `notification/get-all-notifications`,
+                params: {
+                    page,
+                    limit: 9
+                },
                 method :'GET'
             }),
             providesTags : ["notification"]
