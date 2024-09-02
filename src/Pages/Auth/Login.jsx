@@ -5,6 +5,7 @@ import login from "../../assets/Login.png";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useGetUserMutation } from "../../redux/api/userApi";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [getUser, { data, isLoading, isSuccess, isError }] = useGetUserMutation();
@@ -13,14 +14,23 @@ const Login = () => {
     try {
       const response = await getUser({ email: values.email, password: values.password }).unwrap();
       if (response?.data?.accessToken) {
-        // Store token in localStorage
         localStorage.setItem('accessToken', JSON.stringify(response?.data?.accessToken));
         navigate("/");
       } else {
         console.error('Login failed: No token received');
       }
     } catch (error) {
-      console.error('Login failed: ', error);
+      console.error(
+
+        Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: error?.data?.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
+      );
+
     }
   };
 

@@ -4,7 +4,7 @@ import { IoDocumentAttachOutline } from 'react-icons/io5';
 import { MdDeleteOutline } from 'react-icons/md';
 
 const ResourcesViewModal = ({ viewModalOpen, setViewModalOpen, pdf }) => {
-  const baseURL = 'http://192.168.10.239:5001/';
+  const baseURL = 'http://147.182.171.17:5001/';
   ;
 
   // Extract the filename from the path

@@ -17,7 +17,7 @@ const Profile = () => {
         email: userInfo?.data?.email
       });
       if (userInfo.data.profile_image) {
-        const baseUrl = 'http://192.168.10.239:5001/'
+        const baseUrl = 'http://147.182.171.17:5001/'
         const imageUrl = `${baseUrl}${userInfo?.data?.profile_image}`
         setImgURL(imageUrl);
       }
@@ -33,7 +33,7 @@ const Profile = () => {
     formData.append("profile_image", image);
   
     // updateUser({id,formData}).unwrap()
-    axios.patch(`http://192.168.10.239:5001/auth/admin/edit-profile/${id}`, formData, {
+    axios.patch(`http://147.182.171.17:5001/auth/admin/edit-profile/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${JSON.parse(localStorage.getItem('accessToken'))}`

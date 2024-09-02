@@ -18,7 +18,7 @@ const Dashboard = () => {
   const { pathname } = useLocation();
   const {data : userInfo , isError, isLoading} = useGetUserInfoQuery()
   
-  const baseUrl  = 'http://192.168.10.239:5001/'
+  const baseUrl  = 'http://147.182.171.17:5001/'
   const imageUrl = `${baseUrl}${userInfo?.data?.profile_image}`
   const linkItems = [
     {

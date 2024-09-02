@@ -15,7 +15,7 @@ const AddResourcesModal = ({ addModalOpen, setAddModalOpen, uploadId }) => {
     formData.append("test", uploadId);
     formData.append("pdf", fileList);
     
-    axios.post('http://192.168.10.239:5001/resource/add', formData, {
+    axios.post('http://147.182.171.17:5001/resource/add', formData, {
       headers: {
         'Content-Type': 'multipart/form-data', 
         'Authorization': `Bearer ${JSON.parse(localStorage.getItem('accessToken'))}`
