@@ -1,42 +1,38 @@
-import { Modal } from 'antd';
-import React from 'react';
-import { IoDocumentAttachOutline } from 'react-icons/io5';
-import { MdDeleteOutline } from 'react-icons/md';
+import { Modal } from "antd";
+import React from "react";
+import { IoDocumentAttachOutline } from "react-icons/io5";
+import { MdDeleteOutline } from "react-icons/md";
 
 const ResourcesViewModal = ({ viewModalOpen, setViewModalOpen, pdf }) => {
-  const baseURL = 'http://147.182.171.17:5001/';
-  ;
-
+  const baseURL = "https://server.jorneehq.com/";
   // Extract the filename from the path
-  const pdfName = pdf?.split('/');
-  const filename = pdfName?.pop();  
+  const pdfName = pdf?.split("/");
+  const filename = pdfName?.pop();
   const fullURL = `${baseURL}${pdf}`;
-  
 
   // Handle download functionality
   const handleDownload = () => {
-    window.open(fullURL, '_blank');
-   
+    window.open(fullURL, "_blank");
   };
 
   return (
     <Modal
       open={viewModalOpen}
       onCancel={() => setViewModalOpen(false)}
-      footer={null} 
+      footer={null}
     >
       <div className="my-4 mx-5">
         <div className="flex px-5 py-3 gap-4 border border-gray-400 rounded-lg m-5">
           {filename ? (
             <div>
               <p>
-                <IoDocumentAttachOutline size={20} /> 
+                <IoDocumentAttachOutline size={20} />
               </p>
               <div>
                 <p className="font-medium pb-1">{filename}</p>
-                <p 
+                <p
                   className="font-medium text-[#1DA1F2] cursor-pointer"
-                  onClick={handleDownload} 
+                  onClick={handleDownload}
                 >
                   Click to View
                 </p>

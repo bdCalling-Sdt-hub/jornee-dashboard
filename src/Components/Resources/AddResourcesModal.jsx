@@ -14,21 +14,26 @@ const AddResourcesModal = ({ addModalOpen, setAddModalOpen, uploadId }) => {
     const formData = new FormData();
     formData.append("test", uploadId);
     formData.append("pdf", fileList);
-    
-    axios.post('http://147.182.171.17:5001/resource/add', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data', 
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('accessToken'))}`
-      }
-    })
-    .then((res) => Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "PDF Upload successfully!",
-      showConfirmButton: false,
-      timer: 1500
-    }))
-    .catch((err) => console.log(err));
+
+    axios
+      .post("https://server.jorneehq.com/resource/add", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${JSON.parse(
+            localStorage.getItem("accessToken")
+          )}`,
+        },
+      })
+      .then((res) =>
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "PDF Upload successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      )
+      .catch((err) => console.log(err));
 
     setAddModalOpen(false);
     form.resetFields();
@@ -50,13 +55,11 @@ const AddResourcesModal = ({ addModalOpen, setAddModalOpen, uploadId }) => {
       <h1 className="text-medium text-lg py-3">Add PDF</h1>
       <Form form={form} onFinish={handleSubmit}>
         <div className="flex flex-col items-center">
-          
           <div className="relative w-full">
             <label
               htmlFor="pdfFile"
               className="flex items-center justify-center w-full h-10 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
             >
-             
               <BiCloudUpload size={25} />
 
               <span className="text-gray-500 ml-2">

@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button } from "antd";
 import { MdEdit } from "react-icons/md";
-import { useGetUserInfoQuery,useUpdateUserInfoMutation } from "../../../redux/api/userApi";
+import {
+  useGetUserInfoQuery,
+  useUpdateUserInfoMutation,
+} from "../../../redux/api/userApi";
 import axios from "axios";
 import Swal from "sweetalert2";
 const Profile = () => {
-  const [form] = Form.useForm(); 
+  const [form] = Form.useForm();
   const { data: userInfo, isError, isLoading, refetch } = useGetUserInfoQuery();
-  const [updateUser] = useUpdateUserInfoMutation()
+  const [updateUser] = useUpdateUserInfoMutation();
   const [image, setImage] = useState("");
   const [imgURL, setImgURL] = useState(image);
   useEffect(() => {
     if (userInfo?.data) {
       form.setFieldsValue({
         userName: userInfo?.data?.name,
-        email: userInfo?.data?.email
+        email: userInfo?.data?.email,
       });
       if (userInfo.data.profile_image) {
-        const baseUrl = 'http://147.182.171.17:5001/'
-        const imageUrl = `${baseUrl}${userInfo?.data?.profile_image}`
+        const baseUrl = "https://server.jorneehq.com/";
+        const imageUrl = `${baseUrl}${userInfo?.data?.profile_image}`;
         setImgURL(imageUrl);
       }
     }
@@ -27,41 +30,46 @@ const Profile = () => {
   const handleSubmit = (values) => {
     const id = userInfo?.data?._id;
     const formData = new FormData();
-    
+
     // Append form data
     formData.append("name", values?.userName);
     formData.append("profile_image", image);
-  
-    // updateUser({id,formData}).unwrap()
-    axios.patch(`http://147.182.171.17:5001/auth/admin/edit-profile/${id}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('accessToken'))}`
-      }
-    })
-    .then((res) => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Profile updated successfully!",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      refetch()
 
-    })
-    .catch((err) => {
-      console.error('Error:', err.response);
-      Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Error updating profile!",
-        showConfirmButton: false,
-        timer: 1500
+    // updateUser({id,formData}).unwrap()
+    axios
+      .patch(
+        `https://server.jorneehq.com/auth/admin/edit-profile/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("accessToken")
+            )}`,
+          },
+        }
+      )
+      .then((res) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Profile updated successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
+      })
+      .catch((err) => {
+        console.error("Error:", err.response);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Error updating profile!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
-    });
   };
-  
 
   const onChange = (e) => {
     const file = e?.target?.files[0];

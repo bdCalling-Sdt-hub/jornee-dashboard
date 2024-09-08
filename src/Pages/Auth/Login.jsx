@@ -8,29 +8,34 @@ import { useGetUserMutation } from "../../redux/api/userApi";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const [getUser, { data, isLoading, isSuccess, isError }] = useGetUserMutation();
+  const [getUser, { data, isLoading, isSuccess, isError }] =
+    useGetUserMutation();
   const navigate = useNavigate();
   const onFinish = async (values) => {
     try {
-      const response = await getUser({ email: values.email, password: values.password }).unwrap();
+      const response = await getUser({
+        email: values.email,
+        password: values.password,
+      }).unwrap();
       if (response?.data?.accessToken) {
-        localStorage.setItem('accessToken', JSON.stringify(response?.data?.accessToken));
+        localStorage.setItem(
+          "accessToken",
+          JSON.stringify(response?.data?.accessToken)
+        );
         navigate("/");
       } else {
-        console.error('Login failed: No token received');
+        console.error("Login failed: No token received");
       }
     } catch (error) {
       console.error(
-
         Swal.fire({
-        position: "top-center",
-        icon: "error",
-        title: error?.data?.message,
-        showConfirmButton: false,
-        timer: 1500
-      })
+          position: "center",
+          icon: "error",
+          title: error?.data?.message ?? "Failed to login",
+          showConfirmButton: false,
+          timer: 1500,
+        })
       );
-
     }
   };
 
