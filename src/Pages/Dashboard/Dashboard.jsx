@@ -16,10 +16,10 @@ import { FaRegUser } from "react-icons/fa6";
 
 const Dashboard = () => {
   const { pathname } = useLocation();
-  const {data : userInfo , isError, isLoading} = useGetUserInfoQuery()
-  
-  const baseUrl  = 'http://147.182.171.17:5001/'
-  const imageUrl = `${baseUrl}${userInfo?.data?.profile_image}`
+  const { data: userInfo, isError, isLoading } = useGetUserInfoQuery();
+
+  const baseUrl = "https://server.jorneehq.com/";
+  const imageUrl = `${baseUrl}${userInfo?.data?.profile_image}`;
   const linkItems = [
     {
       title: "Dashboard",
@@ -253,20 +253,25 @@ const Dashboard = () => {
           <div></div>
           <Link to="/setting">
             <div className=" flex items-center  ">
-              {
-                userInfo?.data?.profile_image ? <img
-                src={imageUrl}
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "100%",
-                }}
-                alt=""
-              /> : <FaRegUser size={30} />
-              }
-              
+              {userInfo?.data?.profile_image ? (
+                <img
+                  src={imageUrl}
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "100%",
+                  }}
+                  alt=""
+                />
+              ) : (
+                <FaRegUser size={30} />
+              )}
+
               <div>
-                <p className="p-3 h-3 font-semibold"> {userInfo?.data?.name} </p>
+                <p className="p-3 h-3 font-semibold">
+                  {" "}
+                  {userInfo?.data?.name}{" "}
+                </p>
                 <p className="p-3"> {userInfo?.data?.role} </p>
               </div>
             </div>
